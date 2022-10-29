@@ -1,18 +1,28 @@
-import React from 'react';
-import Header from '../partials/Header';
+import React, { useEffect} from 'react';
+import WidgetHeader from "../partials/WidgetHeader";
 import Footer from '../partials/Footer';
+import { useRecoilState } from "recoil";
+import { themeState } from "../utils/Atom";
+
 
 
 function Widgets() {
+
+    const [theme, setTheme] = useRecoilState(themeState);
+
+    useEffect(() => {
+    }, [theme])
+
+
     return (
-        <div className="flex flex-col min-h-screen overflow-hidden">
+        <div data-theme={theme}>
 
-        <Header />
-        <h1>
-            "Hello"
-        </h1>
+            <WidgetHeader />
+            <h1>
+                "Hello"
+            </h1>
 
-        <Footer />
+            <Footer />
         </div>
 
 
