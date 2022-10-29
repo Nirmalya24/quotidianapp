@@ -1,8 +1,8 @@
 import React, { useEffect} from 'react';
-import WidgetHeader from "../partials/WidgetHeader";
-import Footer from '../partials/Footer';
 import { useRecoilState } from "recoil";
 import { themeState } from "../utils/Atom";
+import WidgetHeader from "../partials/WidgetHeader";
+import DragDrop from "../partials/DragDrop";
 
 
 
@@ -22,7 +22,7 @@ function Widgets() {
                 "Hello"
             </h1>
 
-            <Footer />
+            <DragDrop />
         </div>
 
 

@@ -52,5 +52,4 @@ function WidgetHeader() {
 
 }
 
-
 export default WidgetHeader;
