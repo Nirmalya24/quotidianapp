@@ -7,7 +7,6 @@ import FeaturesBlocks from '../partials/FeaturesBlocks';
 import Testimonials from '../partials/Testimonials';
 import Newsletter from '../partials/Newsletter';
 import Footer from '../partials/Footer';
-// import { useGoogleOneTapLogin } from "react-google-one-tap-login";
 
 function Home() {
   return (
