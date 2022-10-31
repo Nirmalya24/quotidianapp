@@ -49,6 +49,20 @@
   padding: 1rem;
 }
 
+/* Widget Page Menu */
+.widget-menu {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.widget-menu .menu {
+  flex: 0 1 55%;
+}
+
+.widget-menu .x {
+  flex: 0 1 10%;
+}
+
 /* Widget Page Side bar */
 .sidebar {
   position: fixed;
@@ -94,4 +108,31 @@
 .backdrop-open {
   display: block;
   width: calc(100% - 280px);
+}
+
+/* Widget Page Theme bar */
+.themebar {
+  position: fixed;
+  background-color: #999;
+  color: white;
+  right: 0;
+  height: 100vh;
+  width: 280px;
+  transform: translateY(50%);
+  transition: all 0.4s;
+}
+
+.themebar-open {
+  transform: translateY(0%);
+}
+
+.themebar-menu {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.theme-dropdown {
+  display: flex;
+  flex-direction: column;
 }
