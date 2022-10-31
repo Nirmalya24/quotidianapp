@@ -7,7 +7,7 @@ import {
   swap,
   move
 } from "react-grid-dnd";
-import "../css/drag-drop-css/ddcss.css";
+import "../css/widget-page/ddcss.css";
 
 
 

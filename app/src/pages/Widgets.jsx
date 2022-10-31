@@ -1,32 +1,32 @@
-import React, { useEffect} from 'react';
-import { useRecoilState } from "recoil";
-import { themeState } from "../utils/Atom";
-import WidgetHeader from "../partials/WidgetHeader";
-import DragDrop from "../partials/DragDrop";
+import React, { useEffect, useState} from 'react';
+import { useRecoilState } from 'recoil';
+import { themeState } from '../utils/Atom';
+import WidgetNavBar from '../partials/WidgetNavBar';
+import WidgetSideBar from '../partials/WidgetSideBar';
+import WidgetBackDrop from '../partials/WidgetBackDrop';
 
 
 
 function Widgets() {
 
+    const [sidebar, setSidebar] = useState(false);
     const [theme, setTheme] = useRecoilState(themeState);
+
+    const toggleSidebar = () => {
+        setSidebar((sidebar) => !sidebar)
+        console.log('Side bar open is: ', sidebar)
+    }
 
     useEffect(() => {
     }, [theme])
 
-
     return (
         <div data-theme={theme}>
-
-            <WidgetHeader />
-            <h1>
-                "Hello"
-            </h1>
-
-            <DragDrop />
+            <WidgetNavBar openSidebar={toggleSidebar}/>
+            <WidgetSideBar openSidebar={sidebar}/>
+            <WidgetBackDrop openSidebar={sidebar} 
+            closeSidebar={toggleSidebar}/>
         </div>
-
-
-
     )
 
 }
