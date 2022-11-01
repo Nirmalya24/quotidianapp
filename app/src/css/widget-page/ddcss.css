@@ -38,60 +38,19 @@
 }
 
 
-/* Widget Page Nav bar */
-.navbar {
-  background-color: rgb(93, 80, 106);
-  color: white;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: right;
-  padding: 1rem;
+/* Widget Page Menu Drawer bar */
+.burger {
+  position: absolute;
+  z-index: 2;
 }
 
-/* Widget Page Menu */
-.widget-menu {
-  display: flex;
-  flex-direction: row-reverse;
+.drawer-side {
+  position: absolute;
+  z-index: 1;
 }
 
-.widget-menu .menu {
-  flex: 0 1 55%;
-}
-
-.widget-menu .x {
-  flex: 0 1 10%;
-}
-
-/* Widget Page Side bar */
-.sidebar {
-  position: fixed;
-  background-color: rgb(93, 80, 106);
-  color: white;
-  right: 0;
-  height: 100vh;
-  width: 280px;
-  transform: translateX(100%);
-  transition: all 0.4s;
-}
-
-.sidebar li {
-  list-style: none;
-  padding: 1rem 2rem;
-  border-bottom: solid rgba(255, 255, 255, 0.1) 1px;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-weight: 300;
-}
-
-.sidebar li:hover {
-  background-color: #fff;
-  color: #000;
-}
-
-.sidebar-open {
-  transform: translateX(0%);
+.btn-size {
+  width: 60%;
 }
 
 /* Widget Page Back drop */
@@ -107,32 +66,31 @@
 
 .backdrop-open {
   display: block;
+  background-color: orange;
   width: calc(100% - 280px);
 }
 
 /* Widget Page Theme bar */
-.themebar {
-  position: fixed;
-  background-color: #999;
-  color: white;
+.themebar-open{
+  position: absolute;
+  z-index: 3;
+  background-color: rgb(155, 127, 183);
   right: 0;
+  top: 0;
   height: 100vh;
-  width: 280px;
-  transform: translateY(50%);
+  width: 310px;
+  transform: translateY(0%);
   transition: all 0.4s;
 }
 
-.themebar-open {
-  transform: translateY(0%);
+.themebar-closed {
+  display: none;
+  transform: translateY(100%);
 }
 
-.themebar-menu {
+.themebar-title {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 1rem 2rem;
 
-}
-
-.theme-dropdown {
-  display: flex;
-  flex-direction: column;
 }

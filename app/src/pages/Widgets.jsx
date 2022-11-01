@@ -1,43 +1,36 @@
 import React, { useEffect, useState} from 'react';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../utils/Atom';
-import WidgetNavBar from '../partials/WidgetNavBar';
 import WidgetSideBar from '../partials/WidgetSideBar';
 import WidgetBackDrop from '../partials/WidgetBackDrop';
-import ThemePick from '../partials/ThemePick';
+import ThemeBar from '../partials/ThemeBar';
 
 
 
 function Widgets() {
 
-    const [sidebar, setSidebar] = useState(false);
-    const [themebar, setThemebar] = useState(false);
-    
-    
-    const [theme, setTheme] = useRecoilState(themeState);
+    const [themebar, setThemebar] = useState(false)
+    const [theme, setTheme] = useRecoilState(themeState)
 
-    const toggleSidebar = () => {
-        setSidebar((sidebar) => !sidebar)
-        console.log('Side bar open is: ', sidebar)
+    const openThemebar = () => {
+        console.log("Open theme bar")
+        setThemebar(true)
     }
 
-    const toggleThemePick = () => {
-        setThemebar((themebar) => !themebar)
-        console.log('ThemePick open is: ', themebar)
+    const closeThemebar = () => {
+        console.log("Close theme bar")
+        setThemebar(false)
     }
-
 
     useEffect(() => {
     }, [theme])
 
     return (
         <div data-theme={theme}>
-            <WidgetNavBar openSidebar={toggleSidebar}/>
-            <WidgetSideBar openSidebar={sidebar} 
-                           openThemebar={toggleThemePick}/>
-            <WidgetBackDrop openSidebar={sidebar} 
-                            closeSidebar={toggleSidebar}/>
-            <ThemePick openThemebar={themebar}/>
+            <WidgetSideBar openThemebar={openThemebar}/>
+            {/* <WidgetBackDrop openSidebar={sidebar} 
+                            closeSidebar={toggleSidebar}/> */}
+            <ThemeBar themebarState={themebar} closeThemebar={closeThemebar}/>
         </div>
     )
 
