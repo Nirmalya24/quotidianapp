@@ -5,29 +5,47 @@ import "../css/widget-page/ddcss.css";
 import { Link } from 'react-router-dom';
 
 
-function WidgetMenuBar({ openThemebar }) {
+function WidgetMenuBar({ menubarState, themebarState, openThemebar }) {
     const [menubar, setMenubar] = useState(false);
 
-
-    const toggleMenubar = () => {
-        console.log("Toggle burger menu button")
-        setMenubar((menubar) => !menubar)
+    const openMenubar = () => {
+        console.log("Open menu bar")
+        setMenubar(true)
     }
+
+    const closeMenubar = () => {
+        console.log("Close menu bar")
+        setMenubar(false)
+    }
+
+    useEffect(() => {
+        if (menubarState)
+            setMenubar(true)
+    }, [menubarState])
+
+    useEffect(() => {
+        if (themebarState)
+            setMenubar(false)
+    }, [themebarState])
+
+    console.log("Menu bar open ", menubar)
 
     return (
         <div className="drawer drawer-end">
-            <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-            <div className="burger" onClick={toggleMenubar}>
+            <div className="burger" onClick={openMenubar}>
                 <label htmlFor="my-drawer-4" className="btn glass btn-ghost">
-                    <i className={menubar ? 'ri-close-circle-line': 'ri-menu-line'}></i>
+                    <i className={menubar ? 'ri-close-circle-line' : 'ri-menu-line'}></i>
                 </label>
             </div>
-            <div className="drawer-side">
-                <label className="drawer-overlay"></label>
-                <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-                    <div>
+            <div className={menubar ? "menubar-open" : "menubar-closed"}>
+                <div className="menu p-4 overflow-y-auto w-80 bg-base-100 glass text-base-content">
+                    <div className='bar-title-minus'>
                         <div>Menu</div>
+                        <div onClick={closeMenubar} >
+                            <i className='ri-close-circle-line'></i>
+                        </div>
                     </div>
+
                     <li>
                         <button className='btn-size'>
                             <i className='ri-tools-line'></i>
@@ -35,12 +53,13 @@ function WidgetMenuBar({ openThemebar }) {
                         </button>
                     </li>
                     <li>
-                        <button className='btn-size' onClick={openThemebar} >
-                            <i className='ri-landscape-line'></i> 
+                        <button className='btn-size'
+                            onClick={openThemebar}>
+                            <i className='ri-landscape-line'></i>
                             Theme
                         </button>
                     </li>
-                </ul>
+                </div>
             </div>
         </div>
     )

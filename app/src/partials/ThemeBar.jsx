@@ -1,23 +1,21 @@
 import React from 'react';
 import "../css/widget-page/ddcss.css";
 
-function ThemeBar({ themebarState, closeThemebar, returnToMenu}) {
+function ThemeBar({ themebarState, closeMenubar, openMenubar}) {
 
     return (
-        <div className={themebarState ? 'themebar-open' : 'themebar-closed'}>
-            {console.log("Hey, ", themebarState)}
-            <div className='themebar-title'>
-                <div onClick={returnToMenu}>
+        <div className={themebarState ? 'themebar-open glass' : 'themebar-closed'}>
+            <div className='bar-title'>
+                <div onClick={openMenubar}>
                     <i className='ri-arrow-left-circle-line'></i>
                 </div>
                 <div>Change Theme</div>
-                <div onClick={closeThemebar} >
+                <div onClick={closeMenubar} >
                     <i className='ri-close-circle-line'></i>
                 </div>
             </div>
             <div>
-                <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-                <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+                <ul className="menu p-4 overflow-y-auto w-80">
                     <button onClick={() => clickTheme('retro')}>
                         <div data-theme="retro" className="menu dropdown-content 
                     p-2 shadow bg-base-100 rounded-box w-52 mt-4">
