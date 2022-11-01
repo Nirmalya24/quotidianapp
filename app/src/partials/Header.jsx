@@ -1,36 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import jwt_decode from "jwt-decode";
+import { Link } from "react-router-dom";
+import Google from "../utils/GoogleButton";
 
 function Header() {
-  const [user, setUser] = useState(false);
-
-  function handleCallbackResponse(response) {
-    // console.log("Encoded JWT response:", response);
-    let userObj = jwt_decode(response.credential);
-    console.log("Decoded JWT response:", userObj);
-    setUser(userObj);
-    document.getElementById("google-signin-button").style.display = "none";
-  }
-
-  // Global google
-  useEffect(() => {
-    google.accounts.id.initialize({
-      client_id:
-        "321432838940-6b0v4vec649gq9iflbl0cfupn7vp47ql.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-      // ux_mode: "popup",
-      allowed_parent_origins: ["http://localhost:5173", "http://localhost"],
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById("google-signin-button"),
-      { theme: "outline", size: "medium", type: "standard" }
-    );
-
-    google.accounts.id.prompt(); // also display the One Tap dialog
-  }, []);
-
   const [top, setTop] = useState(true);
 
   // detect whether user has scrolled the page down by 10px
@@ -87,22 +59,7 @@ function Header() {
           {/* Site navigation */}
           <nav className="flex flex-grow">
             <div className="flex flex-grow justify-end flex-wrap items-center">
-              <button
-                id="google-signin-button"
-                className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
-              ></button>
-              {user && <div>Welcome {user.name}</div>}
-              {user && (
-                <button
-                  id="google-signout-button"
-                  onClick={(e) => {
-                    handleSignout(e);
-                  }}
-                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
-                >
-                  Sign out
-                </button>
-              )}
+              <Google />
             </div>
 
             {/* <ul className="flex flex-grow justify-end flex-wrap items-center">
