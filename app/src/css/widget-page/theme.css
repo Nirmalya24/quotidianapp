@@ -1,0 +1,43 @@
+/************ SCROLL GRADIENT **************/
+.gradient-0 {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, #ded7da, #ece8eb, #dbd4e1, #e3d1e9);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.gradient-1 {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, #2AF598, #fec051, #FEE140, #FA709A);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.gradient-2 {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, #ea84aa, #b18aa4, #8f78a4, #ce85e6);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.gradient-3 {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, #d98703, #a26929, #694a33, #5c4733);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.widget-gridspace {
+    background-color: #FFF;
+    margin: 80px 10%;
+    padding: 30px 60px;
+    box-shadow: 0 3px 26px 0 rgba(0, 0, 0, 0.20);
+}

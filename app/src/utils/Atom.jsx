@@ -1,9 +1,9 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 // Recoil States
 
-// Theme state
-export const themeState = atom({
-  key: "themeState",
-  default: "valentine",
+// Gradient state
+export const gradientState = atom({
+  key: 'gradientState',
+  default: 'gradient-0',
 });

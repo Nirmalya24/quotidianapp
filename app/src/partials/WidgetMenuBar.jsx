@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilState } from "recoil";
-import { themeState } from '../utils/Atom';
-import "../css/widget-page/ddcss.css";
-import { Link } from 'react-router-dom';
+import '../css/widget-page/ddcss.css';
 
 
-function WidgetMenuBar({ menubarState, themebarState, openThemebar }) {
+function WidgetMenuBar({ menubarState, themebarState, widgetbarState, openThemebar, openWidgetbar }) {
     const [menubar, setMenubar] = useState(false);
 
     const openMenubar = () => {
@@ -28,7 +25,10 @@ function WidgetMenuBar({ menubarState, themebarState, openThemebar }) {
             setMenubar(false)
     }, [themebarState])
 
-    console.log("Menu bar open ", menubar)
+    useEffect(() => {
+        if (widgetbarState)
+            setMenubar(false)
+    }, [widgetbarState])
 
     return (
         <div className="drawer drawer-end">
@@ -45,16 +45,14 @@ function WidgetMenuBar({ menubarState, themebarState, openThemebar }) {
                             <i className='ri-close-circle-line'></i>
                         </div>
                     </div>
-
                     <li>
-                        <button className='btn-size'>
+                        <button className='btn-size' onClick={openWidgetbar}>
                             <i className='ri-tools-line'></i>
                             Widgets
                         </button>
                     </li>
                     <li>
-                        <button className='btn-size'
-                            onClick={openThemebar}>
+                        <button className='btn-size' onClick={openThemebar}>
                             <i className='ri-landscape-line'></i>
                             Theme
                         </button>
