@@ -5,21 +5,21 @@ import "../css/widget-page/ddcss.css";
 import { Link } from 'react-router-dom';
 
 
-function WidgetSideBar({ openThemebar }) {
-    const [sidebar, setSidebar] = useState(false);
+function WidgetMenuBar({ openThemebar }) {
+    const [menubar, setMenubar] = useState(false);
 
 
-    const toggleSidebar = () => {
+    const toggleMenubar = () => {
         console.log("Toggle burger menu button")
-        setSidebar((sidebar) => !sidebar)
+        setMenubar((menubar) => !menubar)
     }
 
     return (
         <div className="drawer drawer-end">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-            <div className="burger" onClick={toggleSidebar}>
+            <div className="burger" onClick={toggleMenubar}>
                 <label htmlFor="my-drawer-4" className="btn glass btn-ghost">
-                    <i className={sidebar ? 'ri-close-circle-line': 'ri-menu-line'}></i>
+                    <i className={menubar ? 'ri-close-circle-line': 'ri-menu-line'}></i>
                 </label>
             </div>
             <div className="drawer-side">
@@ -46,4 +46,4 @@ function WidgetSideBar({ openThemebar }) {
     )
 }
 
-export default WidgetSideBar;
+export default WidgetMenuBar;

@@ -1,13 +1,15 @@
 import React from 'react';
 import "../css/widget-page/ddcss.css";
 
-function ThemeBar({ themebarState, closeThemebar }) {
+function ThemeBar({ themebarState, closeThemebar, returnToMenu}) {
 
     return (
         <div className={themebarState ? 'themebar-open' : 'themebar-closed'}>
             {console.log("Hey, ", themebarState)}
             <div className='themebar-title'>
-                <div><i className='ri-arrow-left-circle-line'></i></div>
+                <div onClick={returnToMenu}>
+                    <i className='ri-arrow-left-circle-line'></i>
+                </div>
                 <div>Change Theme</div>
                 <div onClick={closeThemebar} >
                     <i className='ri-close-circle-line'></i>

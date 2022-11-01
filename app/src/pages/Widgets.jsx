@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useRecoilState } from 'recoil';
 import { themeState } from '../utils/Atom';
-import WidgetSideBar from '../partials/WidgetSideBar';
+import WidgetMenuBar from '../partials/WidgetMenuBar';
 import WidgetBackDrop from '../partials/WidgetBackDrop';
 import ThemeBar from '../partials/ThemeBar';
 
@@ -22,15 +22,22 @@ function Widgets() {
         setThemebar(false)
     }
 
+    const openMenubar = () => {
+        console.log("Re-open menu bar")
+        setThemebar(false)
+    }
+
     useEffect(() => {
     }, [theme])
 
     return (
         <div data-theme={theme}>
-            <WidgetSideBar openThemebar={openThemebar}/>
+            <WidgetMenuBar openThemebar={openThemebar}/>
             {/* <WidgetBackDrop openSidebar={sidebar} 
                             closeSidebar={toggleSidebar}/> */}
-            <ThemeBar themebarState={themebar} closeThemebar={closeThemebar}/>
+            <ThemeBar themebarState={themebar} 
+                    closeThemebar={closeThemebar}
+                    returnToMenu={openMenubar}/>
         </div>
     )
 
