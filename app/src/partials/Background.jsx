@@ -9,14 +9,14 @@ function Background() {
     const [gradient, setGradient] = useRecoilState(gradientState);
 
     return (
-        <div className={gradient}>
-            <div className="widget-gridspace">
+      <div className={gradient}>
+        {/* <div className="widget-gridspace">
                 <header>
                     <h1>Widgets go here</h1>
                 </header>
-            </div>
-        </div>
-    )
+            </div> */}
+      </div>
+    );
 }
 
 export default Background;
