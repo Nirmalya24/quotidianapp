@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, {useState} from "react";
 import {
   GridContextProvider,
   GridDropZone,
@@ -12,7 +11,7 @@ import "../css/widget-page/ddcss.css";
 
 
 function DragDrop() {
-  const [items, setItems] = React.useState({
+  const [items, setItems] = useState({
     left: [
       { id: 1, name: "ben" },
       { id: 2, name: "joe" },
@@ -32,6 +31,7 @@ function DragDrop() {
   });
 
   function onChange(sourceId, sourceIndex, targetIndex, targetId) {
+    console.log(sourceId, sourceIndex, targetIndex, targetId)
     if (targetId) {
       const result = move(
         items[sourceId],
@@ -39,6 +39,8 @@ function DragDrop() {
         sourceIndex,
         targetIndex
       );
+      console.log(result[0])
+      console.log(result[1])
       return setItems({
         ...items,
         [sourceId]: result[0],

@@ -1,11 +1,15 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { gradientState } from '../utils/Atom';
 import Background from '../partials/Background';
 import WidgetMenuBar from '../partials/WidgetMenuBar';
 import ThemeBar from '../partials/ThemeBar';
 import WidgetBar from '../partials/WidgetBar';
-
+import DragDrop from '../partials/DragDrop';
+import { render } from 'react-dom'
+import {Container} from '../partials/Container'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function Widgets() {
     const [menubar, setMenubar] = useState(false)
@@ -42,21 +46,25 @@ function Widgets() {
 
     return (
         <div>
-            <Background />
-            <WidgetMenuBar 
+            {/* <Background /> */}
+            {/* <DragDrop /> */}
+            <DndProvider backend={HTML5Backend}>
+                <Container widgetBarState={widgetbar}/>
+            </DndProvider>
+            <WidgetMenuBar
                 menubarState={menubar}
-                themebarState={themebar} 
-                widgetbarState={widgetbar} 
+                themebarState={themebar}
+                widgetbarState={widgetbar}
                 openThemebar={openThemebar}
-                openWidgetbar={openWidgetbar}/>
-            <ThemeBar 
-                themebarState={themebar} 
+                openWidgetbar={openWidgetbar} />
+            <ThemeBar
+                themebarState={themebar}
                 closeMenubar={closeMenubar}
-                openMenubar={openMenubar}/>
-            <WidgetBar 
-                widgetbarState={widgetbar} 
+                openMenubar={openMenubar} />
+            <WidgetBar
+                widgetbarState={widgetbar}
                 closeMenubar={closeMenubar}
-                openMenubar={openMenubar}/>
+                openMenubar={openMenubar} />
         </div>
     )
 

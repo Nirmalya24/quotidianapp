@@ -71,6 +71,12 @@
   transform: translateY(100%);
 }
 
+.widgetbar2-closed {
+  display: none;
+  /* transform: translateY(100%); */
+}
+
+
 /************ DRAG DROP **************/
 /* Widget Drag-drop */
 .container {
