@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { gradientState } from '../utils/Atom';
-import Background from '../partials/Background';
+import React, { useState } from 'react';
 import WidgetMenuBar from '../partials/WidgetMenuBar';
 import ThemeBar from '../partials/ThemeBar';
 import WidgetBar from '../partials/WidgetBar';
-import DragDrop from '../partials/DragDrop';
-import { render } from 'react-dom'
-import {Container} from '../partials/Container'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { StatefulTargetBox as TargetBox } from "../partials/TargetBox";
@@ -47,7 +41,7 @@ function Widgets() {
 
   return (
     <div>
-      <Background />
+      {/* <Background /> */}
       {/* <DragDrop /> */}
       <DndProvider backend={HTML5Backend}>
         <div style={{ float: "left", marginLeft: "5rem", marginTop: ".5rem" }}>

@@ -1,11 +1,9 @@
 import { memo, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
+import { WIDGET_TYPE } from './Container'
+import { colors } from './Container'
 
-const Colors = {
-    YELLOW: 'yellow',
-    BLUE: 'blue',
-  }
-  
+
 const style = {
   border: '1px solid gray',
   height: '15rem',
@@ -14,49 +12,46 @@ const style = {
   textAlign: 'center',
 }
 const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor }) {
-  const [{ isOver, draggingColor, canDrop }, drop] = useDrop(
+ 
+  const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
-      accept: [Colors.YELLOW, Colors.BLUE],
-      drop(_item, monitor) {
-        onDrop(monitor.getItemType())
-        return undefined
-      },
+      accept: WIDGET_TYPE,
+      drop: (item) => onDrop(item.id),
       collect: (monitor) => ({
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
-        draggingColor: monitor.getItemType(),
       }),
     }),
     [onDrop],
   )
   const opacity = isOver ? 1 : 0.7
-  let backgroundColor = '#fff'
-  switch (draggingColor) {
-    case Colors.BLUE:
-      backgroundColor = 'lightblue'
-      break
-    case Colors.YELLOW:
-      backgroundColor = 'lightgoldenrodyellow'
-      break
-    default:
-      break
-  }
+  const backgroundColor = lastDroppedColor
+
   return (
     <div
       ref={drop}
-      data-color={lastDroppedColor || 'none'}
+      data-color={"lastDroppedColor" || 'none'}
       style={{ ...style, backgroundColor, opacity }}
       role="TargetBox"
     >
-      <p>Drop here.</p>
+      <p>Widget Go here.</p>
 
-      {!canDrop && lastDroppedColor && <p>Last dropped: {lastDroppedColor}</p>}
+      {!canDrop && lastDroppedColor}
+      
     </div>
   )
 })
 export const StatefulTargetBox = (props) => {
-  const [lastDroppedColor, setLastDroppedColor] = useState(null)
-  const handleDrop = useCallback((color) => setLastDroppedColor(color), [])
+  const [lastDroppedColor, setLastDroppedColor] = useState('gray')
+  const [lastImage, setLastImage] = useState(null)
+  
+  const handleDrop = useCallback((itemID) => { 
+    const widgetToDrop = colors.find(color => {
+      return color.id === itemID;
+    })
+    setLastDroppedColor(widgetToDrop.color);
+    console.log(`color in onDrop: ${itemID}`)
+  }, [])
   return (
     <TargetBox
       {...props}

@@ -1,23 +1,37 @@
 import { memo } from 'react'
 import { SourceBox } from "./SourceBox.jsx";
 
+export const WIDGET_TYPE = 'widget'
+export const colors = [{
+    id: '1',
+    color: "yellow",
+    url:
+    'https://i5.walmartimages.com/asr/c9ac18ff-a698-45c3-a40e-6eacdd9077a8.e7b8c131f9254a2863bb9512a4611e4c.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF',
+  }, {
+    id: '2',
+    color: "blue",
+    url:
+    'https://i.etsystatic.com/16421349/r/il/7c67ce/3027303927/il_1588xN.3027303927_hx5b.jpg',
+  }, {
+    id: '3',
+    color: "red",
+    url:
+    'https://i.etsystatic.com/16421349/r/il/d32f34/3927649281/il_1588xN.3927649281_it40.jpg',
+  }];
+
 export const Container = memo(function Container() {
-  const Colors = {
-    YELLOW: "yellow",
-    BLUE: "blue",
-  };
+  
+  const listColors = colors.map((g) =>
+    <div key={g.id}>
+      <SourceBox 
+        widget={g}
+      ></SourceBox>
+    </div>
+  );
 
   return (
     <div style={{ float: "right", padding: "60px" }}>
-      <SourceBox color={Colors.BLUE}>
-        <SourceBox color={Colors.YELLOW}>
-          <SourceBox color={Colors.YELLOW} />
-          <SourceBox color={Colors.BLUE} />
-        </SourceBox>
-        <SourceBox color={Colors.BLUE}>
-          <SourceBox color={Colors.YELLOW} />
-        </SourceBox>
-      </SourceBox>
+      {listColors}
     </div>
   );
 });

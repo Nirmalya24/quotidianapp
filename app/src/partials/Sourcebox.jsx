@@ -1,60 +1,52 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useDrag } from 'react-dnd'
+import { WIDGET_TYPE } from './Container'
 
 const style = {
-  border: '1px dashed gray',
+  border: '1px solid gray',
   padding: '0.5rem',
   margin: '0.5rem',
 }
 
-const Colors = {
-    YELLOW: 'yellow',
-    BLUE: 'blue',
-  }
-  
-export const SourceBox = memo(function SourceBox({ color, children }) {
+export const SourceBox = memo(function SourceBox({ widget }) {
+  console.log("passed in", widget.id, widget.color)
   const [forbidDrag, setForbidDrag] = useState(false)
   const [{ isDragging }, drag] = useDrag(
     () => ({
-      type: color,
+      type: WIDGET_TYPE,
+      item: {id: widget.id},
       canDrag: !forbidDrag,
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
       }),
     }),
-    [forbidDrag, color],
+    [forbidDrag, widget],
   )
+  
   const onToggleForbidDrag = useCallback(() => {
     setForbidDrag(!forbidDrag)
   }, [forbidDrag, setForbidDrag])
-  const backgroundColor = useMemo(() => {
-    switch (color) {
-      case Colors.YELLOW:
-        return 'lightgoldenrodyellow'
-      case Colors.BLUE:
-        return 'lightblue'
-      default:
-        return 'lightgoldenrodyellow'
-    }
-  }, [color])
+
+  
   const containerStyle = useMemo(
     () => ({
       ...style,
-      backgroundColor,
+      color: 'purple', 
+      background: widget.color,
       opacity: isDragging ? 0.4 : 1,
       cursor: forbidDrag ? 'default' : 'move',
     }),
-    [isDragging, forbidDrag, backgroundColor],
+    [isDragging, forbidDrag],
   )
   return (
-    <div ref={drag} style={containerStyle} role="SourceBox" data-color={color}>
+    <div ref={drag} style={containerStyle} role="SourceBox" data-color={widget.color}>
       <input
         type="checkbox"
         checked={forbidDrag}
         onChange={onToggleForbidDrag}
       />
-      <small>Forbid drag</small>
-      {children}
+      <small>hello drag</small>
+      <img src={widget.url} alt='emoji'></img>
     </div>
   )
 })
