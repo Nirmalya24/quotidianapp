@@ -24,6 +24,11 @@ app.get("/", (req, res) => {
   res.send("Quotidian server is running!");
 });
 
+app.post("/test", (req, res) => {
+  console.log(req.body);
+  res.send("test");
+});
+
 app.post("/api/google-login", async (req, res) => {
   console.log("Received request:", req.body);
   const { token } = req.body;
