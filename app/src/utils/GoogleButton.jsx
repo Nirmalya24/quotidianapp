@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import googleOneTap from "google-one-tap";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const options = {
   client_id: import.meta.env.VITE_CLIENT_ID,
@@ -8,6 +9,8 @@ const options = {
   cancel_on_tap_outside: false,
   context: "use",
 };
+
+const URL = "https://quotidianapp-production.up.railway.app";
 
 function GoogleButton() {
   const [loginData, setLoginData] = useState(
@@ -20,15 +23,22 @@ function GoogleButton() {
     if (!loginData) {
       googleOneTap(options, async (response) => {
         console.log(response);
-        const res = await fetch("/api/google-login", {
-          method: "POST",
-          body: JSON.stringify({
-            token: response.credential,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const headers = {
+          "Content-Type": "application/json",
+        };
+        const res = await axios.post(`${URL}/api/google-login`, {
+          data: JSON.stringify({ token: response.credential }),
+          headers,
         });
+        // const res = await fetch("/api/google-login", {
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     token: response.credential,
+        //   }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
 
         const data = await res.json();
         setLoginData(data);
