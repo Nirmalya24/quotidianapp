@@ -4,6 +4,7 @@ const { OAuth2Client } = require("google-auth-library");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
+const PrismaClient = require("@prisma/client").PrismaClient;
 
 dotenv.config();
 const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -40,6 +41,7 @@ app.post("/api/google-login", async (req, res) => {
     audience: process.env.CLIENT_ID,
   });
 
+  console.log(ticket.getPayload());
   const { name, email, picture } = ticket.getPayload();
   upsert(users, { name, email, picture });
   res.header("Access-Control-Allow-Origin", "*");
