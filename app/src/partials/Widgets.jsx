@@ -1,7 +1,7 @@
 // A list of widgets
 export const WIDGET_TYPE = 'widget'
 
-export const colors = [{
+export const widgets = [{
   id: '1',
   color: "yellow",
   url:

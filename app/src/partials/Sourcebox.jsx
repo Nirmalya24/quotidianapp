@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useDrag } from 'react-dnd'
-import { WIDGET_TYPE, colors } from './Widgets'
+import { WIDGET_TYPE, widgets } from './Widgets'
 
 const style = {
   border: '1px solid gray',
@@ -53,7 +53,7 @@ const SourceBox = memo(function SourceBox({ widget }) {
 
 export const StatefulSourceBox = (props) => {
 
-  const listColors = colors.map((g) =>
+  const widgetList = widgets.map((g) =>
     <div key={g.id}>
       <SourceBox
         widget={g}
@@ -63,7 +63,7 @@ export const StatefulSourceBox = (props) => {
 
   return (
     <div style={{ float: "left", padding: "20px", width: '20vw', overflowY: 'auto' }}>
-      {listColors}
+      {widgetList}
     </div>
   )
 }

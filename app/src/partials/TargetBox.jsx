@@ -1,6 +1,7 @@
 import { memo, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
-import { WIDGET_TYPE, colors } from './Widgets'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { WIDGET_TYPE, widgets } from './Widgets'
 
 
 const style = {
@@ -41,16 +42,22 @@ const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
 
         {!canDrop && lastDroppedColor}
 
-        <div className='targetbox-widgets'>
-          {board && board.map((each) => {
-            return (
-              <img
-                className='dropped-widget'
-                key={each.id}
-                src={each.url} />
-            )
-          })}
-        </div>
+        <DragDropContext>
+
+          <div className='targetbox-widgets'>
+            {board && board.map((each) => {
+              return (
+                <img
+                  className='dropped-widget'
+                  key={each.id}
+                  src={each.url}
+                  alt={each.color}
+                />
+              )
+            })}
+          </div>
+
+        </DragDropContext>
       </div>
     </div>
   )
@@ -61,7 +68,7 @@ export const StatefulTargetBox = (props) => {
   const [lastDroppedColor, setLastDroppedColor] = useState('gray')
 
   const addImageToBoard = useCallback((itemID) => {
-    const widgetToDrop = colors.find((color) => itemID === color.id);
+    const widgetToDrop = widgets.find((color) => itemID === color.id);
     setLastDroppedColor(widgetToDrop.color);
     if (!board || !board.includes(widgetToDrop))
       setBoard((board) => [...board, widgetToDrop]);
