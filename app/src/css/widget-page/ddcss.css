@@ -116,3 +116,13 @@
   align-items: center;
   border-radius: 50%;
 }
+
+
+/************ Widget Target Box **************/
+.targetbox-widgets {
+  width: 10%;
+}
+
+.dropped-widget {
+  padding: 1rem;
+}

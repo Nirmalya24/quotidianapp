@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { useDrop } from 'react-dnd'
 import { WIDGET_TYPE } from './Container'
 import { colors } from './Container'
@@ -6,13 +6,14 @@ import { colors } from './Container'
 
 const style = {
   border: '1px solid gray',
-  height: '15rem',
-  width: '15rem',
+  height: '90vh',
+  width: '90vw',
   padding: '2rem',
   textAlign: 'center',
+  display: 'flex',
 }
-const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor }) {
- 
+const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
+
   const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
       accept: WIDGET_TYPE,
@@ -28,35 +29,52 @@ const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor }) {
   const backgroundColor = lastDroppedColor
 
   return (
-    <div
-      ref={drop}
-      data-color={"lastDroppedColor" || 'none'}
-      style={{ ...style, backgroundColor, opacity }}
-      role="TargetBox"
-    >
+    <div>
       <p>Widget Go here.</p>
 
-      {!canDrop && lastDroppedColor}
-      
+      <div
+        ref={drop}
+        data-color={"lastDroppedColor" || 'none'}
+        style={{ ...style, backgroundColor, opacity }}
+        role="TargetBox"
+      >
+
+        {!canDrop && lastDroppedColor}
+
+        <div className='targetbox-widgets'>
+          {board && board.map((each) => {
+            return (
+              <img
+                className='dropped-widget'
+                key={each.id}
+                src={each.url} />
+            )
+          })}
+        </div>
+      </div>
     </div>
   )
 })
+
 export const StatefulTargetBox = (props) => {
+  const [board, setBoard] = useState([]);
   const [lastDroppedColor, setLastDroppedColor] = useState('gray')
-  const [lastImage, setLastImage] = useState(null)
-  
-  const handleDrop = useCallback((itemID) => { 
-    const widgetToDrop = colors.find(color => {
-      return color.id === itemID;
-    })
+
+  const addImageToBoard = useCallback((itemID) => {
+    const widgetToDrop = colors.find((color) => itemID === color.id);
     setLastDroppedColor(widgetToDrop.color);
-    console.log(`color in onDrop: ${itemID}`)
-  }, [])
+    if (!board || !board.includes(widgetToDrop))
+      setBoard((board) => [...board, widgetToDrop]);
+    else
+      console.log("Adding duplicate image is not allowed.")
+  }, [board])
+
   return (
     <TargetBox
       {...props}
       lastDroppedColor={lastDroppedColor}
-      onDrop={handleDrop}
+      board={board}
+      onDrop={addImageToBoard}
     />
   )
 }
