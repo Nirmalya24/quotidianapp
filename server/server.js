@@ -2,12 +2,14 @@ const express = require("express");
 const dotenv = require("dotenv");
 const { OAuth2Client } = require("google-auth-library");
 const cors = require("cors");
+const helmet = require("helmet");
 const app = express();
 
 dotenv.config();
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 app.use(express.json());
+app.use(helmet());
 app.use(cors());
 
 const users = [];
