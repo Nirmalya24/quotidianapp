@@ -6,11 +6,9 @@ import { RecoilRoot } from 'recoil';
 import 'remixicon/fonts/remixicon.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <RecoilRoot>
       <Router>
         <App />
       </Router>
     </RecoilRoot>
-  </React.StrictMode>
 );
