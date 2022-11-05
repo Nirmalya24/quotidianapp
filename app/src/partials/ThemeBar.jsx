@@ -21,7 +21,7 @@ function ThemeBar({ themebarState, closeMenubar, openMenubar }) {
     );
 
     return (
-        <div className={themebarState ? 'themebar-open glass' : 'themebar-closed'}>
+        <div className={themebarState ? 'themebar-open glass' : 'visibility: hidden'}>
             <div className='bar-title'>
                 <div onClick={openMenubar}>
                     <i className='ri-arrow-left-circle-line'></i>

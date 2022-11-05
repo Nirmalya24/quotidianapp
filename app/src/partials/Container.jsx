@@ -37,7 +37,7 @@ export const Container = memo(function Container() {
   );
 
   return (
-    <div style={{ float: "right", padding: "60px" }}>
+    <div style={{ float: "left", padding: "20px", width: '20vw', overflowY: 'auto'}}>
       {listColors}
     </div>
   );
