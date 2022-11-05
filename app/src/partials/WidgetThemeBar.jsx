@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { gradientState } from '../utils/Atom';
 import "../css/widget-page/ddcss.css";
 
-function ThemeBar({ themebarState, closeMenubar, openMenubar }) {
+function WidgetThemeBar({ themebarState, closeMenubar, openMenubar }) {
 
     const [gradient, setGradient] = useRecoilState(gradientState);
 
@@ -38,4 +38,4 @@ function ThemeBar({ themebarState, closeMenubar, openMenubar }) {
     )
 }
 
-export default ThemeBar;
+export default WidgetThemeBar;

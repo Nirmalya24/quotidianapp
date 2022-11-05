@@ -1,7 +1,6 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useDrop } from 'react-dnd'
-import { WIDGET_TYPE } from './Container'
-import { colors } from './Container'
+import { WIDGET_TYPE, colors } from './Widgets'
 
 
 const style = {
@@ -12,6 +11,7 @@ const style = {
   textAlign: 'center',
   display: 'flex',
 }
+
 const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
 
   const [{ isOver, canDrop }, drop] = useDrop(

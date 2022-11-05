@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import '../css/widget-page/ddcss.css';
-import { Container } from "./Container";
 
 function Burger({ menubarState, openMenubar }) {
     const [menubar, setMenubar] = useState(false);

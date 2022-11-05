@@ -1,6 +1,6 @@
 import React from 'react';
+import { StatefulSourceBox as SourceBox} from "../partials/SourceBox";
 import '../css/widget-page/ddcss.css';
-import { Container } from "./Container";
 
 function WidgetBar({ widgetbarState, closeMenubar, openMenubar }) {
   return (
@@ -17,8 +17,8 @@ function WidgetBar({ widgetbarState, closeMenubar, openMenubar }) {
         </div>
       </div>
 
-      {/* Widgets to be dragged and dropped container */}
-      <Container />
+      {/* Widgets to be dragged and dropped */}
+      <SourceBox />
     </div>
   );
 }

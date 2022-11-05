@@ -1,6 +1,6 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useDrag } from 'react-dnd'
-import { WIDGET_TYPE } from './Container'
+import { WIDGET_TYPE, colors } from './Widgets'
 
 const style = {
   border: '1px solid gray',
@@ -8,13 +8,13 @@ const style = {
   margin: '0.5rem',
 }
 
-export const SourceBox = memo(function SourceBox({ widget }) {
+const SourceBox = memo(function SourceBox({ widget }) {
   console.log("passed in", widget.id, widget.color)
   const [forbidDrag, setForbidDrag] = useState(false)
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: WIDGET_TYPE,
-      item: {id: widget.id},
+      item: { id: widget.id },
       canDrag: !forbidDrag,
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
@@ -22,22 +22,22 @@ export const SourceBox = memo(function SourceBox({ widget }) {
     }),
     [forbidDrag, widget],
   )
-  
+
   const onToggleForbidDrag = useCallback(() => {
     setForbidDrag(!forbidDrag)
   }, [forbidDrag, setForbidDrag])
 
-  
   const containerStyle = useMemo(
     () => ({
       ...style,
-      color: 'purple', 
+      color: 'purple',
       background: widget.color,
       opacity: isDragging ? 0.4 : 1,
       cursor: forbidDrag ? 'default' : 'move',
     }),
     [isDragging, forbidDrag],
   )
+
   return (
     <div ref={drag} style={containerStyle} role="SourceBox" data-color={widget.color}>
       <input
@@ -50,3 +50,20 @@ export const SourceBox = memo(function SourceBox({ widget }) {
     </div>
   )
 })
+
+export const StatefulSourceBox = (props) => {
+
+  const listColors = colors.map((g) =>
+    <div key={g.id}>
+      <SourceBox
+        widget={g}
+      ></SourceBox>
+    </div>
+  );
+
+  return (
+    <div style={{ float: "left", padding: "20px", width: '20vw', overflowY: 'auto' }}>
+      {listColors}
+    </div>
+  )
+}

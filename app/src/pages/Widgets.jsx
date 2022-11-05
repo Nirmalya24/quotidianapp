@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import WidgetMenuBar from '../partials/WidgetMenuBar';
-import ThemeBar from '../partials/ThemeBar';
+import ThemeBar from '../partials/WidgetThemeBar';
 import WidgetBar from '../partials/WidgetBar';
 import Burger from '../partials/Burger';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { StatefulTargetBox as TargetBox } from "../partials/TargetBox";
+import { StatefulTargetBox as TargetBox} from "../partials/TargetBox";
 
 function Widgets() {
   const [menubar, setMenubar] = useState(false);

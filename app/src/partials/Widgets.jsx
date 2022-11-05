@@ -1,7 +1,6 @@
-import { memo } from 'react'
-import { SourceBox } from "./SourceBox.jsx";
-
+// A list of widgets
 export const WIDGET_TYPE = 'widget'
+
 export const colors = [{
   id: '1',
   color: "yellow",
@@ -23,22 +22,3 @@ export const colors = [{
   url:
   'https://i5.walmartimages.com/asr/b85ca1f5-7827-4057-ad41-d38a258355ff.9f47d77efed2336fadf99166218c2bd8.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF',
 }];
-
-
-
-export const Container = memo(function Container() {
-
-  const listColors = colors.map((g) =>
-    <div key={g.id}>
-      <SourceBox
-        widget={g}
-      ></SourceBox>
-    </div>
-  );
-
-  return (
-    <div style={{ float: "left", padding: "20px", width: '20vw', overflowY: 'auto'}}>
-      {listColors}
-    </div>
-  );
-});
