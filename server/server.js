@@ -42,6 +42,7 @@ app.post("/api/google-login", async (req, res) => {
 
   const { name, email, picture } = ticket.getPayload();
   upsert(users, { name, email, picture });
+  res.header("Access-Control-Allow-Origin", "*");
   res.status(201);
   res.json({ name, email, picture });
 });
