@@ -14,7 +14,7 @@ app.use(express.json());
 
 const users = [];
 
-function unsert(array, item) {
+function upsert(array, item) {
   const i = array.findIndex((_item) => _item.email === item.email);
   if (i !== -1) {
     array[i] = item;
