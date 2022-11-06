@@ -11,6 +11,7 @@ const options = {
 };
 
 const URL = "https://quotidianapp-dev.up.railway.app";
+// const URL = "http://localhost:5001";
 
 function GoogleButton() {
   const [loginData, setLoginData] = useState(
@@ -19,12 +20,12 @@ function GoogleButton() {
       : null
   );
 
-  console.log(loginData);
+  console.log("Login data:", loginData);
 
   useEffect(() => {
     // if (!loginData) {
     googleOneTap(options, async (response) => {
-      console.log(response);
+      console.log("Response from Google:", response);
       const res = await fetch(`${URL}/api/google-login`, {
         method: "POST",
         body: JSON.stringify({

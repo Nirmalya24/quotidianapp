@@ -4,48 +4,22 @@ const { OAuth2Client } = require("google-auth-library");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
-const prismaClient = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
-const prisma = new prismaClient.PrismaClient();
+dotenv.config(); // Load environment variables from .env file
+const client = new OAuth2Client(process.env.CLIENT_ID); // Google OAuth2 client
 
-dotenv.config();
-const client = new OAuth2Client(process.env.CLIENT_ID);
+app.use(helmet()); // Set security HTTP headers
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Parse JSON bodies
 
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-
-const findUserByEmail = async (email) => {
-  await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-};
-
-const createUser = async (user) => {
-  await prisma.user.create({
-    data: {
-      email: user.email,
-      first_name: user.given_name,
-      last_name: user.family_name,
-      google_id: user.sub,
-      token: user.token,
-    },
-  });
-};
-
-const updateUserToken = async (user) => {
-  await prisma.user.update({
-    where: {
-      email: user.email,
-    },
-    data: {
-      token: user.token,
-    },
-  });
-};
-
+/**
+ * @param {string} token
+ * @returns {Promise<import("google-auth-library").LoginTicket>}
+ * Sends a request to the Google OAuth2 API to verify the token
+ * and returns the response.
+ **/
 const verifyToken = async (token) => {
   const ticket = await client.verifyIdToken({
     idToken: token,
@@ -55,17 +29,48 @@ const verifyToken = async (token) => {
   return payload;
 };
 
+/**
+ * @param {object} user
+ * @param {string} token
+ * @returns {Promise<import("@prisma/client").User>}
+ * Creates a new user in the database if the user does not exist.
+ * If the user exists, it returns the user.
+ */
+const upsertUser = async (user, token) => {
+  await prisma.user.upsert({
+    where: {
+      google_id: user.sub,
+    },
+    update: {
+      token: token,
+    },
+    create: {
+      email: user.email,
+      given_name: user.given_name,
+      family_name: user.family_name,
+      google_id: user.sub,
+      token: token,
+    },
+  });
+};
+
+/**
+ * Default route to check if the server is running
+ */
 app.get("/", (req, res) => {
   res.send("Quotidian server is running!");
 });
 
+/**
+ * Test route to check if the server is running
+ */
 app.post("/test", (req, res) => {
   console.log(req.body);
   res.send("test");
 });
 
 /*
- * Google One Tap Login
+ * Google One Tap Login route
  * https://developers.google.com/identity/gsi/web/reference/js-reference#googleonetap
  * This function is responsible for verifying the token sent from the client
  * and returning the user's data.
@@ -76,24 +81,17 @@ app.post("/test", (req, res) => {
  *
  */
 app.post("/api/google-login", async (req, res) => {
-  console.log("Received request:", req.body);
-  console.log("Checking if user is already in database...");
-  const user = findUserByEmail(req.body.email);
-  if (user) {
-    console.log("User already exists in database!");
-    console.log("Updating user token...");
-    await updateUserToken(req.body);
-    console.log("User token updated!");
-  } else {
-    console.log("User does not exist in database, creating user...");
-    createUser(req.body);
-  }
+  const tokenReceived = req.body.token;
+  console.log("Received request");
   console.log("Verifying token...");
   const payload = await verifyToken(req.body.token);
-  const { name, email, picture, token } = payload;
+  console.log("Payload:", payload);
+  const { name, family_name, given_name, email, sub } = payload;
+  await upsertUser(payload, tokenReceived);
+
   res.header("Access-Control-Allow-Origin", "*");
   res.status(201);
-  res.json({ name, email, picture, token });
+  res.json({ name, email, tokenReceived });
 });
 
 app.listen(process.env.PORT || 5001, () => {
