@@ -16,5 +16,6 @@ model User {
     given_name      String
     family_name     String
     google_id       String   @unique
+    token           String    @unique
     createdAt       DateTime @default(now())
 }
