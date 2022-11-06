@@ -4,7 +4,7 @@ const { OAuth2Client } = require("google-auth-library");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
-const PrismaClient = require("@prisma/client").PrismaClient;
+const prisma = require("@prisma/client").PrismaClient;
 
 dotenv.config();
 const client = new OAuth2Client(process.env.CLIENT_ID);
@@ -12,17 +12,6 @@ const client = new OAuth2Client(process.env.CLIENT_ID);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-
-const users = [];
-
-function upsert(array, item) {
-  const i = array.findIndex((_item) => _item.email === item.email);
-  if (i !== -1) {
-    array[i] = item;
-  } else {
-    array.push(item);
-  }
-}
 
 const findUserByEmail = async (email) =>
   await prisma.user.findUnique({
@@ -73,16 +62,16 @@ app.post("/test", (req, res) => {
 });
 
 /*
-  * Google One Tap Login
-  * https://developers.google.com/identity/gsi/web/reference/js-reference#googleonetap
-  * This function is responsible for verifying the token sent from the client
-  * and returning the user's data.
-  * If the user is not in the database, it will create a new user.
-  * If the user is in the database, it will update the user's token.
-  * The token is used to verify the user's identity when they make requests to the API.
-  * The token is stored in the database and sent to the client.
-  * 
-*/
+ * Google One Tap Login
+ * https://developers.google.com/identity/gsi/web/reference/js-reference#googleonetap
+ * This function is responsible for verifying the token sent from the client
+ * and returning the user's data.
+ * If the user is not in the database, it will create a new user.
+ * If the user is in the database, it will update the user's token.
+ * The token is used to verify the user's identity when they make requests to the API.
+ * The token is stored in the database and sent to the client.
+ *
+ */
 app.post("/api/google-login", async (req, res) => {
   console.log("Received request:", req.body);
   console.log("Checking if user is already in database...");
@@ -98,10 +87,10 @@ app.post("/api/google-login", async (req, res) => {
   }
   console.log("Verifying token...");
   const payload = await verifyToken(req.body.token);
-  const { name, email, picture } = payload;
+  const { name, email, picture, token } = payload;
   res.header("Access-Control-Allow-Origin", "*");
   res.status(201);
-  res.json({ name, email, picture });
+  res.json({ name, email, picture, token });
 });
 
 app.listen(process.env.PORT || 5001, () => {
