@@ -4,7 +4,7 @@ const { OAuth2Client } = require("google-auth-library");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
-const prisma = require("@prisma/client").PrismaClient;
+const prisma = require("@prisma/client").PrismaClient();
 
 dotenv.config();
 const client = new OAuth2Client(process.env.CLIENT_ID);
