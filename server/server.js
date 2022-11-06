@@ -13,12 +13,13 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-const findUserByEmail = async (email) =>
+const findUserByEmail = async (email) => {
   await prisma.user.findUnique({
     where: {
       email: email,
     },
   });
+};
 
 const createUser = async (user) => {
   await prisma.user.create({
