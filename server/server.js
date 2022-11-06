@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 const findUserByEmail = async (email) => {
-  await prisma.user.findOne({
+  await prisma.user.findUnique({
     where: {
       email: email,
     },
