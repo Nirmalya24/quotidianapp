@@ -66,7 +66,7 @@ app.get("/", (req, res) => {
  */
 app.post("/test", (req, res) => {
   console.log(req.body);
-  res.send("test");
+  res.json(req.body);
 });
 
 /*
