@@ -14,7 +14,7 @@ import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
-
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const location = useLocation();
@@ -41,6 +41,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         {/* <Route path="/test" element={<Test />} /> */}
       </Routes>
     </>
