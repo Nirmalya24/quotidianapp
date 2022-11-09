@@ -1,233 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
+import Emoji from "../utils/Emoji";
+import Control from "../images/control.png";
 import Logo from "../images/Q..png";
+import { Link } from "react-router-dom";
 
 function DashboardSidebar() {
+  const [open, setOpen] = useState(true);
+  const Menus = [
+    {
+      title: "Home",
+      src: <Emoji symbol="🏠" label="Home" />,
+      link: "/dashboard",
+    },
+    {
+      title: "News",
+      src: <Emoji symbol="📰" label="News" />,
+      link: "/dashboard/news",
+    },
+    {
+      title: "Productivity",
+      src: <Emoji symbol="📥" label="Productivity" />,
+      link: "/dashboard/productivity",
+    },
+    {
+      title: "Schedule",
+      src: <Emoji symbol="🗓️" label="Schedule" />,
+      link: "/dashboard/schedule",
+    },
+    {
+      title: "Setting",
+      src: <Emoji symbol="⚙️" label="Settings" />,
+      link: "/dashboard/settings",
+    },
+  ];
+
   return (
-    <div className="h-screen w-max flex bg-gray-200 mr-5">
-      {/*  container */}
-
-      <aside className="flex-col items-center bg-white text-gray-700 shadow h-full">
-        {/* <!-- Side Nav Bar--> */}
-
-        <div className="h-16 flex items-center w-full">
-          {/* <!-- Logo Section --> */}
-          <a className="h-6 w-6 mx-auto" href="/">
-            <img className="h-6 w-6 mx-auto" src={Logo} alt="quotidian logo" />
-          </a>
-        </div>
-
-        <ul>
-          {/* <!-- Items Section --> */}
-          <li className="hover:bg-gray-100">
-            <div className="tooltip tooltip-right" data-tip="Inbox">
-              <a
-                href="."
-                className="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
-                  <path
-                    d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0
-							2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0
-							0-1.79 1.11z"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </li>
-
-          <li className="hover:bg-gray-100">
-            <div className="tooltip tooltip-right" data-tip="Important stuff">
-              <a
-                href="."
-                className="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                </svg>
-              </a>
-            </div>
-          </li>
-
-          <li className="hover:bg-gray-100">
-            <div className="tooltip tooltip-right" data-tip="Trash">
-              <a
-                href="."
-                className="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path
-                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2
-							0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </li>
-
-          <li className="hover:bg-gray-100">
-            <div className="tooltip tooltip-right" data-tip="Shopping">
-              <a
-                href="."
-                className="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="9" cy="21" r="1"></circle>
-                  <circle cx="20" cy="21" r="1"></circle>
-                  <path
-                    d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0
-							2-1.61L23 6H6"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </li>
-
-          <li className="hover:bg-gray-100">
-            <div className="tooltip tooltip-right" data-tip="Settings">
-              <a
-                href="."
-                className="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1
-							0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0
-							0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2
-							2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0
-							0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1
-							0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0
-							0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65
-							0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0
-							1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0
-							1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2
-							0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0
-							1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0
-							2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0
-							0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65
-							1.65 0 0 0-1.51 1z"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </li>
-
-          <li className="hover:bg-gray-100">
-            <div className="tooltip tooltip-right" data-tip="Alerts">
-              <a
-                href="."
-                className="h-16 px-6 flex justify-center items-center w-full
-					focus:text-orange-500"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                </svg>
-              </a>
-            </div>
-          </li>
-        </ul>
-
-        <div className="mt-auto h-16 flex items-center w-full">
-          {/* <!-- Action Section --> */}
-
-          <button
-            className="h-16 w-10 mx-auto flex justify-center items-center
-				w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none tooltip tooltip-warning tooltip-right"
-            data-tip="Logout"
+    <div className="flex">
+      <div
+        className={` ${
+          open ? "w-72" : "w-20 "
+        } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
+      >
+        <img
+          src={Control}
+          className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
+           border-2 rounded-full  ${!open && "rotate-180"}`}
+          onClick={() => setOpen(!open)}
+        />
+        <div className="flex gap-x-4 items-center">
+          <img
+            src={Logo}
+            className={`cursor-pointer duration-500 ${
+              open && "rotate-[360deg]"
+            }`}
+          />
+          <h1
+            className={`text-white origin-left font-medium text-xl duration-200 ${
+              !open && "scale-0"
+            }`}
           >
-            <svg
-              className="h-5 w-5 text-red-700"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-          </button>
+            Quotidian.app
+          </h1>
         </div>
-      </aside>
+        <ul className="pt-6">
+          {Menus.map((Menu, index) => (
+            <Link to={Menu.link} relative="path" key={index}>
+              <li
+                key={index}
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4 
+              ${Menu.gap ? "mt-8" : "mt-2"} ${
+                  index === 0 && "bg-light-white"
+                } `}
+              >
+                {Menu.src}
+                <span
+                  className={`${!open && "hidden"} origin-left duration-200`}
+                >
+                  {Menu.title}
+                </span>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
