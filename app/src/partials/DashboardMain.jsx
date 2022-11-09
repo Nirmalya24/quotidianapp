@@ -16,7 +16,7 @@ function DashboardMain() {
             Nothing is particulary hard if you break it down into small jobs.
           </p>
           <div className="card-actions justify-end">
-            <a href="https://www.youtube.com/watch?v=7vBb4-E-4Qc">
+            <a href="https://www.goodreads.com/quotes/tag/motivational">
               <button className="btn">Need more motivation?</button>
             </a>
           </div>
