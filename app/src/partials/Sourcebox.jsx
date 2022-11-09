@@ -1,6 +1,7 @@
 import { memo, useCallback, useMemo, useState } from 'react'
 import { useDrag } from 'react-dnd'
 import { WIDGET_TYPE, widgets } from './Widgets'
+import TimerImage from "../images/timer.png"
 
 const style = {
   border: '1px solid gray',
@@ -38,6 +39,16 @@ const SourceBox = memo(function SourceBox({ widget }) {
     [isDragging, forbidDrag],
   )
 
+  const getWidgetImage = (url) => {
+    switch(url) {
+      case "TimerImage":
+        return <img src={TimerImage} alt='timerImage'/>
+      default:
+        return <img src={widget.url} alt='emoji' />
+    }
+    
+  }
+
   return (
     <div ref={drag} style={containerStyle} role="SourceBox" data-color={widget.color}>
       <input
@@ -46,7 +57,9 @@ const SourceBox = memo(function SourceBox({ widget }) {
         onChange={onToggleForbidDrag}
       />
       <small>hello drag</small>
-      <img src={widget.url} alt='emoji'></img>
+      <div >
+        {getWidgetImage(widget.url)}
+      </div>
     </div>
   )
 })
