@@ -1,8 +1,5 @@
 import React from "react";
-import Logo from "../images/Q..png";
 import DashboardSidebar from "../partials/DashboardSidebar";
-import DashboardMain from "../partials/DashboardMain";
-import AppDrawer from "../utils/AppDrawer";
 import { Outlet } from "react-router-dom";
 
 function Dashboard() {
