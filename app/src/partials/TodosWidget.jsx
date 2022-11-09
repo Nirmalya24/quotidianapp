@@ -57,27 +57,25 @@ function TodosWidget() {
         }}
       ></input>
 
-      {todos.map(
-        (todo, index) => (
-          console.log(todo.todo, " is ", todo.isCompleted),
-          (
-            <div key={index} className="flex items-center py-1">
-              <input
-                type="checkbox"
-                className="checkbox-success mx-2 cursor-pointer"
-                checked={todo.isCompleted}
-                onClick={() => completeTodo(index)}
-              />
-              <div className={`grow ${todo.isCompleted ? "line-through" : ""}`}>
-                {todo.todo}
-              </div>
-              <div onClick={() => deleteTodo(index)} className="cursor-pointer">
-                &#128465;
-              </div>
-            </div>
-          )
-        )
-      )}
+      {todos.map((todo, index) => (
+        <div key={index} className="flex items-center py-1">
+          <input
+            type="checkbox"
+            className="checkbox-success mx-2 cursor-pointer"
+            checked={todo.isCompleted}
+            onClick={() => completeTodo(index)}
+            onChange={() => {
+              todo.isCompleted;
+            }}
+          />
+          <div className={`grow ${todo.isCompleted ? "line-through" : ""}`}>
+            {todo.todo}
+          </div>
+          <div onClick={() => deleteTodo(index)} className="cursor-pointer">
+            &#128465;
+          </div>
+        </div>
+      ))}
       {todos.length > 0 && `${todos.length} items`}
     </div>
   );
