@@ -26,7 +26,6 @@ const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
     }),
     [onDrop],
   )
-  const opacity = isOver ? 1 : 0.7
   const backgroundColor = lastDroppedColor
 
   return (
@@ -36,7 +35,7 @@ const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
       <div
         ref={drop}
         data-color={"lastDroppedColor" || 'none'}
-        style={{ ...style, backgroundColor, opacity }}
+        style={{ ...style, backgroundColor }}
         role="TargetBox"
       >
 

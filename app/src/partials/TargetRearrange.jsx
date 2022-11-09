@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import '../css/widget-page/ddcss.css';
+import Timer from './Timer';
 
 function TargetRearrange({ board }) {
 
@@ -13,6 +14,14 @@ function TargetRearrange({ board }) {
         console.log("switching positions to: ", result.destination.index)
     }
 
+    const getComponent = (component) => {
+        {console.log("here", component)}
+        switch(component) {
+            case "Timer":
+                return <Timer/>
+        }
+    }
+
     return (
         <div className="widget-rearrange">
             <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -22,7 +31,7 @@ function TargetRearrange({ board }) {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            {board.map(({ id, color, url }, index) => {
+                            {board.map(({ id, color, url, component }, index) => {
                                 return (
                                     <Draggable key={id} draggableId={id} index={index}>
                                         {(provided) => (
@@ -30,6 +39,7 @@ function TargetRearrange({ board }) {
                                                 <div className="widgets-url">
                                                     <img src={url} alt={color} />
                                                 </div>
+                                                 {getComponent(component)}
                                                 <p>
                                                     {color}
                                                 </p>
