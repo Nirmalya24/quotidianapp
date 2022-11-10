@@ -110,10 +110,11 @@
 /************ Widget Timer **************/
 
 .timer-group {
-    margin: 0 auto;
     position: relative;
     color: orange;
     font-family: 'Yanone Kaffeesatz', sans-serif;
+    height: 25rem;
+        width: 25rem;
 }
 
 .stop-start {
@@ -130,6 +131,7 @@
 
 .stop-start h1 {
     font-weight: 300;
+    font-size: 1.5rem;
 }
 
 .stop-start p {
@@ -137,7 +139,7 @@
     font-size: 4.75rem;
     font-weight: 400;
     position: absolute;
-    top: 1.063rem;
+    top: 4rem;
     width: 16.25rem;
     left: 1.25rem;
 }
@@ -146,9 +148,7 @@
     border-radius: 50%;
     background-color: rgba(157, 247, 66, 0.759);
     height: 25rem;
-    left: 0;
     width: 25rem;
-    top: 0;
 }
 
 .timer {

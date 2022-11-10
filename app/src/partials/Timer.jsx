@@ -73,7 +73,7 @@ function Timer() {
   }, [faceTime]);
 
   return (
-    <div className="timer-group">
+    <div className="timer-group h-fit">
       <div className={isPaused ? "paused" : ""}>
         <div className="timer hour">
           <div className={`hand ${hidden}`}>
