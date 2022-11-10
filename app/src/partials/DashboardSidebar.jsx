@@ -32,6 +32,11 @@ function DashboardSidebar() {
       src: <Emoji symbol="⚙️" label="Settings" />,
       link: "/dashboard/settings",
     },
+    {
+      title: "Widget Drawer",
+      src: <Emoji symbol="💪🏽" label="Settings" />,
+      link: "/dashboard/settings",
+    },
   ];
 
   return (
