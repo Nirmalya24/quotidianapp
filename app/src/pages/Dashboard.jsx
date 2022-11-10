@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardSidebar from "../partials/DashboardSidebar";
+import DashboardSidebar from "../partials/Dashboard/DashboardSidebar";
 import { Outlet } from "react-router-dom";
 
 function Dashboard() {

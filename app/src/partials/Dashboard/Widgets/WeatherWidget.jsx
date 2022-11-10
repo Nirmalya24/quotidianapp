@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Sunset from "../images/sunset.jpeg";
+import Sunset from "../../../images/sunset.jpeg";
 import axios from "axios";
-function WeatherWidgetComponent() {
+function WeatherWidget() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
 
@@ -93,4 +93,4 @@ function WeatherWidgetComponent() {
   );
 }
 
-export default WeatherWidgetComponent;
+export default WeatherWidget;

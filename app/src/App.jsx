@@ -12,14 +12,12 @@ import AOS from 'aos';
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import DashboardSidebarNew from "./partials/DashboardSidebar";
-import DashboardMain from "./partials/DashboardMain";
-import NewsDashboard from "./partials/NewsDashboard";
-import ProductivityDashboard from "./partials/ProductivityDashboard";
-import ScheduleDashboard from "./partials/ScheduleDashboard";
-import Settings from "./partials/Settings";
-import Timer from "./partials/Timer";
-import WeatherWidget from "./partials/WeatherWidget";
+import DashboardMain from "./partials/Dashboard/DashboardMain";
+import NewsDashboard from "./partials/Dashboard/Pages/NewsDashboard";
+import ProductivityDashboard from "./partials/Dashboard/Pages/ProductivityDashboard";
+import ScheduleDashboard from "./partials/Dashboard/Pages/ScheduleDashboard";
+import Settings from "./partials/Dashboard/Pages/SettingsDashboard";
+import WeatherDashboard from "./partials/Dashboard/Pages/WeatherDashboard";
 
 import "./css/widget-css/global.css";
 import "./css/widget-css/weather.css";
@@ -51,10 +49,9 @@ function App() {
           <Route path="news" element={<NewsDashboard />} />
           <Route path="productivity" element={<ProductivityDashboard />} />
           <Route path="schedule" element={<ScheduleDashboard />} />
-          <Route path="weather" element={<WeatherWidget />} />
+          <Route path="weather" element={<WeatherDashboard />} />
           <Route path="settings" element={<Settings />} />
         </Route>
-        <Route path="/test" element={<Timer />} />
       </Routes>
     </>
   );

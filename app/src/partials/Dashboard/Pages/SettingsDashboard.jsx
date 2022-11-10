@@ -1,6 +1,6 @@
 import React from "react";
 
-function Settings() {
+function SettingsDashboard() {
   return (
     <div className="flex">
       <div className="h-screen flex-1 p-7">
@@ -10,4 +10,4 @@ function Settings() {
   );
 }
 
-export default Settings;
+export default SettingsDashboard;

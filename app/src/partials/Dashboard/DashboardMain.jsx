@@ -1,6 +1,6 @@
 import React from "react";
-import TodosWidget from "./TodosWidget";
-import WeatherWidgetComponent from "./WeatherWidgetComponent";
+import TodosWidget from "./Widgets/TodosWidget";
+import WeatherWidgetComponent from "./Widgets/WeatherWidget";
 
 function DashboardMain() {
   return (

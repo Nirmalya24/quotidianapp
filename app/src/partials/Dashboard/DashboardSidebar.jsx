@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Emoji from "../utils/Emoji";
-import Control from "../images/control.png";
-import Logo from "../images/Q..png";
+import Emoji from "../../utils/Emoji";
+import Control from "../../images/control.png";
+import Logo from "../../images/Q..png";
 import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 
 function DashboardSidebar() {
   const [open, setOpen] = useState(true);
-  const [submenuOpen, setSubmenuOpen] = useState(false)
+  const [submenuOpen, setSubmenuOpen] = useState(false);
 
   const Menus = [
     {
@@ -46,16 +46,16 @@ function DashboardSidebar() {
       link: "/dashboard/settings",
       submenu: true,
       submenuItems: [
-        { 
-          title: "To Do List", 
+        {
+          title: "To Do List",
           icon: <Emoji symbol="📝" label="ToDo" />,
         },
-        { 
-          title: "Mind Map", 
+        {
+          title: "Mind Map",
           icon: <Emoji symbol="🧠" label="MindMap" />,
         },
-        { 
-          title: "Timer" , 
+        {
+          title: "Timer",
           icon: <Emoji symbol="⏰" label="Timer" />,
         },
       ],
@@ -65,7 +65,7 @@ function DashboardSidebar() {
   const openMenuCloseDrawer = () => {
     setOpen(!open);
     setSubmenuOpen(false);
-  }
+  };
 
   const openWidgetDrawer = (e, menu) => {
     let itemClicked = menu.src.props.label;

@@ -23,7 +23,7 @@ var requestAnimationFrame = (function () {
   );
 })();
 
-function Timer() {
+function TimerWidget() {
   const [faceTime, setFaceTime] = useState("00:00:00");
   const [hidden, setHidden] = useState("hidden");
 
@@ -111,4 +111,4 @@ function Timer() {
     </div>
   );
 }
-export default Timer;
+export default TimerWidget;
