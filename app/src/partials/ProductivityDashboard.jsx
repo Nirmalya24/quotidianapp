@@ -22,7 +22,7 @@ function ProductivityDashboard() {
         </div>
 
         {/* Timer */}
-        <div className="card w-96 bg-primary text-primary-content ml-0 m-6">
+        <div className="card w-auto bg-primary text-primary-content ml-0 m-6">
           <div className="card-body">
             <Timer />
           </div>
