@@ -26,7 +26,11 @@
     display: none;
 }
 /* Weather Widget */
-@layer components {}
+@layer components {
+    .side-rotate {
+        @apply absolute inset-y-0 right-0 w-16 origin-center -rotate-90 h-fit mt-8 text-lg;
+    }
+}
 
 .card.image-full:before {
     @apply opacity-40;
