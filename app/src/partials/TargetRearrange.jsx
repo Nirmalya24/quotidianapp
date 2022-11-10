@@ -15,41 +15,37 @@ function TargetRearrange({ board }) {
     }
 
     const getComponent = (component) => {
-        {console.log("here", component)}
-        switch(component) {
+        { console.log("here", component) }
+        switch (component) {
             case "Timer":
-                return <Timer/>
+                return <Timer />
         }
     }
 
     return (
-        <div className="widget-rearrange">
+        <div>
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Droppable droppableId="widgets">
                     {(provided) => (
-                        <ul className="widgets"
+                        <div className='flex flex-wrap'
                             {...provided.droppableProps}
-                            ref={provided.innerRef}
-                        >
-                            {board.map(({ id, color, url, component }, index) => {
+                            ref={provided.innerRef}>
+                            {board.map(({ id, color, component }, index) => {
                                 return (
-                                    <Draggable key={id} draggableId={id} index={index}>
+                                    <Draggable
+                                        key={id} draggableId={id} index={index}>
                                         {(provided) => (
-                                            <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                                <div className="widgets-url">
-                                                    <img src={url} alt={color} />
+                                            <div className="widgets " ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <div >
+                                                    {getComponent(component)}
                                                 </div>
-                                                 {getComponent(component)}
-                                                <p>
-                                                    {color}
-                                                </p>
-                                            </li>
+                                            </div>
                                         )}
                                     </Draggable>
                                 );
                             })}
                             {provided.placeholder}
-                        </ul>
+                        </div>
                     )}
                 </Droppable>
             </DragDropContext>
