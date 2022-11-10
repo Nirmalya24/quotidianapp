@@ -19,7 +19,7 @@ import ProductivityDashboard from "./partials/ProductivityDashboard";
 import ScheduleDashboard from "./partials/ScheduleDashboard";
 import Settings from "./partials/Settings";
 import Timer from "./partials/Timer";
-import Weather from "./partials/Weather";
+import WeatherWidget from "./partials/WeatherWidget";
 
 import "./css/widget-css/global.css";
 import "./css/widget-css/weather.css";
@@ -51,7 +51,7 @@ function App() {
           <Route path="news" element={<NewsDashboard />} />
           <Route path="productivity" element={<ProductivityDashboard />} />
           <Route path="schedule" element={<ScheduleDashboard />} />
-          <Route path="weather" element={<Weather />} />
+          <Route path="weather" element={<WeatherWidget />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/test" element={<Timer />} />
