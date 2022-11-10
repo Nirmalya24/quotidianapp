@@ -25,3 +25,9 @@
 [x-cloak=""] {
     display: none;
 }
+/* Weather Widget */
+@layer components {}
+
+.card.image-full:before {
+    @apply opacity-40;
+}
