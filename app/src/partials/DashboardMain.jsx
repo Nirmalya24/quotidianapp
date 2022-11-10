@@ -1,5 +1,6 @@
 import React from "react";
 import TodosWidget from "./TodosWidget";
+import WeatherWidgetComponent from "./WeatherWidgetComponent";
 
 function DashboardMain() {
   return (
@@ -22,10 +23,12 @@ function DashboardMain() {
             </div>
           </div>
         </div>
-        {/* TODO Cards */}
+        {/* Todo Cards */}
         <div className="card w-96 bg-neutral text-neutral-content p-4">
           <TodosWidget />
         </div>
+        {/* Weather Widget Component */}
+        <WeatherWidgetComponent />
       </div>
     </div>
   );
