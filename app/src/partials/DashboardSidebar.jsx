@@ -67,11 +67,22 @@ function DashboardSidebar() {
     setSubmenuOpen(false);
   }
 
+  const openWidgetDrawer = (e, menu) => {
+    let itemClicked = menu.src.props.label;
+    console.log("Item clicked: ", itemClicked);
+    if (itemClicked === "Drawer") {
+      console.log("Drawer should open");
+      setSubmenuOpen(!submenuOpen);
+      e.preventDefault();
+    }
+  };
+
   return (
     <div className="flex">
       <div
-        className={` ${open ? "w-72" : "w-20 "
-          } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
+        className={` ${
+          open ? "w-72" : "w-20 "
+        } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src={Control}
@@ -82,51 +93,64 @@ function DashboardSidebar() {
         <div className="flex gap-x-4 items-center">
           <img
             src={Logo}
-            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"
-              }`}
+            className={`cursor-pointer duration-500 ${
+              open && "rotate-[360deg]"
+            }`}
           />
           <h1
-            className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
-              }`}
+            className={`text-white origin-left font-medium text-xl duration-200 ${
+              !open && "scale-0"
+            }`}
           >
             Quotidian.app
           </h1>
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <Link to={Menu.link} relative="path" key={index}>
-              <li
+            <>
+              <Link
+                to={Menu.link}
+                relative="path"
                 key={index}
-                className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4 
-              ${Menu.gap ? "mt-8" : "mt-2"} ${index === 0 && "bg-light-white"
-                  } `}
+                onClick={(e) => openWidgetDrawer(e, Menu)}
               >
-                {Menu.src}
-                <span
-                  className={`${!open && "hidden"} origin-left duration-200`}
+                <li
+                  key={index}
+                  className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4 
+              ${Menu.gap ? "mt-8" : "mt-2"} ${
+                    index === 0 && "bg-light-white"
+                  } `}
                 >
-                  {Menu.title}
-                </span>
-                {Menu.submenu && open && (
-                  <BsChevronDown className={`${submenuOpen && "rotate-180"}`} onClick={() => setSubmenuOpen(!submenuOpen)} />
-                )}
-              </li>
+                  {Menu.src}
+                  <span
+                    className={`${!open && "hidden"} origin-left duration-200`}
+                  >
+                    {Menu.title}
+                  </span>
+                  {Menu.submenu && open && (
+                    <BsChevronDown
+                      className={`${submenuOpen && "rotate-180"}`}
+                    />
+                  )}
+                </li>
+              </Link>
 
               {Menu.submenu && submenuOpen && open && (
                 <div className="grid grid-cols-2 pl-2">
                   {Menu.submenuItems.map((submenuItem, index) => (
-                    <div key={index}
-                      className={`rounded-md cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 items-center`}>
+                    <div
+                      key={index}
+                      className={`rounded-md cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 items-center`}
+                    >
                       <div className="card items-center text-center width-auto card-compact py-3">
-                          <h2 className="text-xs">{submenuItem.title}</h2>
-                          <div className="text-3xl">{submenuItem.icon}</div>
-                        </div>
+                        <h2 className="text-xs">{submenuItem.title}</h2>
+                        <div className="text-3xl">{submenuItem.icon}</div>
                       </div>
-
+                    </div>
                   ))}
                 </div>
               )}
-            </Link>
+            </>
           ))}
         </ul>
       </div>
