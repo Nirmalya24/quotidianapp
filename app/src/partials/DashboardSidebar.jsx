@@ -31,9 +31,9 @@ function DashboardSidebar() {
       link: "/dashboard/schedule",
     },
     {
-      title: "Health",
-      src: <Emoji symbol="💛" label="Schedule" />,
-      link: "/dashboard/schedule",
+      title: "Weather",
+      src: <Emoji symbol="🌤" label="Weather" />,
+      link: "/dashboard/weather",
     },
     {
       title: "Setting",
@@ -42,21 +42,21 @@ function DashboardSidebar() {
     },
     {
       title: "Widget Drawer",
-      src: <Emoji symbol="🎁" label="Settings" />,
+      src: <Emoji symbol="🎁" label="Drawer" />,
       link: "/dashboard/settings",
       submenu: true,
       submenuItems: [
         { 
           title: "To Do List", 
-          icon: <Emoji symbol="📝" label="Settings" />,
+          icon: <Emoji symbol="📝" label="ToDo" />,
         },
         { 
           title: "Mind Map", 
-          icon: <Emoji symbol="🧠" label="Settings" />,
+          icon: <Emoji symbol="🧠" label="MindMap" />,
         },
         { 
           title: "Timer" , 
-          icon: <Emoji symbol="⏰" label="Settings" />,
+          icon: <Emoji symbol="⏰" label="Timer" />,
         },
       ],
     },
@@ -76,7 +76,7 @@ function DashboardSidebar() {
         <img
           src={Control}
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+           border-2 rounded-full z-10 ${!open && "rotate-180"}`}
           onClick={openMenuCloseDrawer}
         />
         <div className="flex gap-x-4 items-center">
