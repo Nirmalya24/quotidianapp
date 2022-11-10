@@ -1,4 +1,5 @@
 import React from "react";
+import Timer from "./Timer";
 
 function ProductivityDashboard() {
   return (
@@ -17,6 +18,13 @@ function ProductivityDashboard() {
                 <button className="btn">CLICK FOR GOOD LUCK</button>
               </a>
             </div>
+          </div>
+        </div>
+
+        {/* Timer */}
+        <div className="card w-96 bg-primary text-primary-content ml-0 m-6">
+          <div className="card-body">
+            <Timer />
           </div>
         </div>
       </div>
