@@ -47,11 +47,13 @@ function WeatherWidgetComponent() {
               {/* Temperature */}
               <div>
                 {data.main ? (
-                  <h1 className="weather-h1">{data.main.temp.toFixed()}°F</h1>
+                  <h1 className="text-7xl my-8">
+                    {data.main.temp.toFixed()}°F
+                  </h1>
                 ) : null}
               </div>
               {/* Side Description */}
-              <div className="absolute inset-y-0 right-0 w-16 origin-center -rotate-90 h-fit mt-8 text-lg">
+              <div className="side-rotate">
                 {data.weather ? <p>{data.weather[0].main}</p> : null}
               </div>
             </div>
