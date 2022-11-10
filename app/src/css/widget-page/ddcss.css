@@ -99,99 +99,64 @@
 
 
 /************ Widget Target Rearrange **************/
-.widget-rearrange {
-  text-align: center;
-}
-
 .widgets {
-  list-style: none;
-  padding-left: 0;
-}
-
-.widgets li {
-  display: flex;
   align-items: center;
   border: solid 2px #a31919;
   border-radius: .2em;
-  padding: .5em .8em .5em .5em;
+  padding: .5em .5em .5em .5em;
   margin-bottom: 1em;
-}
-
-.widgets p {
-  max-width: none;
-  font-weight: bold;
-  margin: 0;
-}
-
-.widgets-url {
-  overflow: hidden;
-  flex-shrink: 0;
-  width: 2em;
-  height: 2em;
-  background-color: #e8e8e8;
-  padding: .5em;
-  margin-right: .5em;
-}
-
-.characters-url img {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 
 /************ Widget Timer **************/
 
 .timer-group {
-  height: 400px;
   margin: 0 auto;
   position: relative;
-  width: 400px;
   color: orange;
   font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-.face {
+.stop-start {
   background: rgba(0, 0, 0, .1);
   border-radius: 50%;
-  height: 296px;
-  left: 52px;
-  padding: 165px 40px 0;
+  height: 18.5rem;
+  left: 3.25rem;
+  padding: 12rem 2.5rem 0;
   position: absolute;
-  width: 296px;
+  width: 18.5rem;
   text-align: center;
-  margin-top: 5rem;
+  top: 3.25rem;
 }
 
-.face h1 {
-  font-size: 20px;
-  font-weight: 300;
+.stop-start  h1 {
+  font-weight: 300; 
 }
 
-.face p {
-  border-radius: 20px;
-  font-size: 76px;
+.stop-start  p {
+  border-radius: 1.25rem;
+  font-size: 4.75rem;
   font-weight: 400;
   position: absolute;
-  top: 17px;
-  width: 260px;
-  left: 20px;
+  top: 1.063rem;
+  width: 16.25rem;
+  left: 1.25rem;
 }
 
 .paused {
   border-radius: 50%;
   background-color: rgba(157, 247, 66, 0.759);
-  height: 400px;
+  height: 25rem;
   left: 0;
-  width: 400px;
+  width: 25rem;
   top: 0;
 }
 
 .timer {
   border-radius: 50%;
-  height: 100px;
+  height: 6.25%;
   overflow: hidden;
   position: absolute;
-  width: 100px;
+  width: 6.25%;
 }
 
 .timer:after {
@@ -199,11 +164,11 @@
   border-radius: 50%;
   content: "";
   display: block;
-  height: 80px;
-  left: 10px;
+  height: 5%;
+  left: 0.625%;
   position: absolute;
-  width: 80px;
-  top: 10px;
+  width: 5%;
+  top: 0.625%;
 }
 
 .timer .hand {
@@ -215,7 +180,7 @@
 }
 
 .timer .hand span {
-  border: 50px solid rgba(0, 255, 255, .4);
+  border: 3.125rem solid rgba(0, 255, 255, .4);
   border-bottom-color: transparent;
   border-left-color: transparent;
   border-radius: 50%;
@@ -248,9 +213,9 @@
 
 .timer.hour {
   background: rgba(0, 0, 0, .3);
-  height: 400px;
+  height: 25rem;
   left: 0;
-  width: 400px;
+  width: 25rem;
   top: 0;
 }
 
@@ -258,58 +223,70 @@
   animation-duration: 3600s;
   border-top-color: rgba(255, 0, 255, .4);
   border-right-color: rgba(255, 0, 255, .4);
-  border-width: 200px;
+  border-width: 12.5rem;
 }
 
 .timer.hour:after {
-  height: 360px;
-  left: 20px;
-  width: 360px;
-  top: 20px;
+  height: 22.5rem;
+  left: 1.25rem;
+  width: 22.5rem;
+  top: 1.25rem;
 }
 
 .timer.minute {
   background: rgba(0, 0, 0, .2);
-  height: 350px;
-  left: 25px;
-  width: 350px;
-  top: 25px;
+  height: 21.875rem;
+  left: 1.563rem;
+  width: 21.875rem;
+  top: 1.563rem;
 }
 
 .timer.minute .hand span {
   animation-duration: 60s;
   border-top-color: rgba(0, 255, 255, .4);
   border-right-color: rgba(0, 255, 255, .4);
-  border-width: 175px;
+  border-width: 10.938rem;
 }
 
 .timer.minute:after {
-  height: 310px;
-  left: 20px;
-  width: 310px;
-  top: 20px;
+  height: 19.375rem;
+  left: 1.25rem;
+  width: 19.375rem;
+  top: 1.25rem;
 }
 
 .timer.second {
   background: rgba(0, 0, 0, .2);
-  height: 300px;
-  left: 50px;
-  width: 300px;
-  top: 50px;
+  height: 18.75rem;
+  left: 3.125rem;
+  width: 18.75rem;
+  top: 3.125rem;
 }
 
 .timer.second .hand span {
   animation-duration: 1s;
   border-top-color: rgba(255, 255, 255, .15);
   border-right-color: rgba(255, 255, 255, .15);
-  border-width: 150px;
+  border-width: 9.375rem;
 }
 
 .timer.second:after {
-  height: 296px;
-  left: 2px;
-  width: 296px;
-  top: 2px;
+  height: 18.5rem;
+  left: 0.125rem;
+  width: 18.5rem;
+  top: 0.125rem;
+}
+
+.face {
+  background: rgba(0, 0, 0, .1);
+  border-radius: 50%;
+  height: 18.5rem;
+  width: 18.5rem;
+  left: 3.25rem;;
+  margin-top: 3.25rem;;
+  padding: 10.313rem 2.5rem 0;
+  position: absolute;
+  text-align: center;
 }
 
 @keyframes spin1 {
