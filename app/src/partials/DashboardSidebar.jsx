@@ -107,34 +107,29 @@ function DashboardSidebar() {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <>
-              <Link
-                to={Menu.link}
-                relative="path"
+            <Link
+              to={Menu.link}
+              relative="path"
+              key={index}
+              onClick={(e) => openWidgetDrawer(e, Menu)}
+            >
+              <li
                 key={index}
-                onClick={(e) => openWidgetDrawer(e, Menu)}
-              >
-                <li
-                  key={index}
-                  className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4 
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4 
               ${Menu.gap ? "mt-8" : "mt-2"} ${
-                    index === 0 && "bg-light-white"
-                  } `}
+                  index === 0 && "bg-light-white"
+                } `}
+              >
+                {Menu.src}
+                <span
+                  className={`${!open && "hidden"} origin-left duration-200`}
                 >
-                  {Menu.src}
-                  <span
-                    className={`${!open && "hidden"} origin-left duration-200`}
-                  >
-                    {Menu.title}
-                  </span>
-                  {Menu.submenu && open && (
-                    <BsChevronDown
-                      className={`${submenuOpen && "rotate-180"}`}
-                    />
-                  )}
-                </li>
-              </Link>
-
+                  {Menu.title}
+                </span>
+                {Menu.submenu && open && (
+                  <BsChevronDown className={`${submenuOpen && "rotate-180"}`} />
+                )}
+              </li>
               {Menu.submenu && submenuOpen && open && (
                 <div className="grid grid-cols-2 pl-2">
                   {Menu.submenuItems.map((submenuItem, index) => (
@@ -150,7 +145,7 @@ function DashboardSidebar() {
                   ))}
                 </div>
               )}
-            </>
+            </Link>
           ))}
         </ul>
       </div>
