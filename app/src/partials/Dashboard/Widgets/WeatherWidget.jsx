@@ -11,7 +11,7 @@ function WeatherWidget() {
     if (event.key === "Enter") {
       axios.get(url).then((response) => {
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       });
       setLocation("");
     }
@@ -26,7 +26,7 @@ function WeatherWidget() {
         <h2 className="card-title">Weather</h2>
         <div className="w-full max-w-xs bg-local bg-cover bg-center">
           <div className="p-1 relative text-center mb-6">
-            {console.log("City: ", data.name, location)}
+            {/* {console.log("City: ", data.name, location)} */}
             <input
               value={location}
               onChange={(event) => setLocation(event.target.value)}

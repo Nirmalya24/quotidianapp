@@ -11,7 +11,7 @@ function WeatherDashboard() {
     if (event.key === "Enter") {
       axios.get(url).then((response) => {
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       });
       setLocation("");
     }
@@ -20,7 +20,7 @@ function WeatherDashboard() {
   return (
     <div className="weather">
       <div className="search">
-        {console.log("City: ", data.name, location)}
+        {/* {console.log("City: ", data.name, location)} */}
         <input
           value={location}
           onChange={(event) => setLocation(event.target.value)}
