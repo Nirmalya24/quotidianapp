@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ResetPassword from './pages/ResetPassword';
 import Widgets from './pages/Widgets';
+import Timer from './partials/Timer';
 
 function App() {
 
@@ -43,6 +44,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/widgets" element={<Widgets />} />
+        <Route path="/time" element={<Timer />} />
+
       </Routes>
     </>
   );

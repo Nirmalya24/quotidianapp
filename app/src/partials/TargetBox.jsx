@@ -10,7 +10,6 @@ const style = {
   width: '90vw',
   padding: '2rem',
   textAlign: 'center',
-  display: 'flex',
 }
 
 const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
@@ -38,12 +37,8 @@ const TargetBox = memo(function TargetBox({ onDrop, lastDroppedColor, board }) {
         style={{ ...style, backgroundColor }}
         role="TargetBox"
       >
-
-        {/* {!canDrop && lastDroppedColor}  */}
-
         {/* Rearrange widgets on the screen */}
-        <TargetRearrange board={board}/>
-
+        <TargetRearrange board={board} />
       </div>
     </div>
   )

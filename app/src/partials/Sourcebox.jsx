@@ -10,7 +10,7 @@ const style = {
 }
 
 const SourceBox = memo(function SourceBox({ widget }) {
-  console.log("passed in", widget.id, widget.color)
+  console.log("passed in", widget.id, widget.color, widget.component)
   const [forbidDrag, setForbidDrag] = useState(false)
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -39,12 +39,12 @@ const SourceBox = memo(function SourceBox({ widget }) {
     [isDragging, forbidDrag],
   )
 
-  const getWidgetImage = (url) => {
-    switch(url) {
-      case "TimerImage":
+  const getWidgetImage = (component) => {
+    switch(component) {
+      case "Timer":
         return <img src={TimerImage} alt='timerImage'/>
       default:
-        return <img src={widget.url} alt='emoji' />
+        return
     }
     
   }
@@ -58,7 +58,7 @@ const SourceBox = memo(function SourceBox({ widget }) {
       />
       <small>hello drag</small>
       <div >
-        {getWidgetImage(widget.url)}
+        {getWidgetImage(widget.component)}
       </div>
     </div>
   )

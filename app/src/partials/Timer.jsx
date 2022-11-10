@@ -74,7 +74,7 @@ function Timer() {
 
     return (
         <div className="timer-group">
-            <div className={isPaused? "paused":""}>
+            <div className={isPaused ? "paused" : ""}>
                 <div className="timer hour">
                     <div className={`hand ${hidden}`}><span></span></div>
                     <div className={`hand ${hidden}`}><span></span></div>
@@ -87,14 +87,13 @@ function Timer() {
                     <div className={`hand ${hidden}`}><span></span></div>
                     <div className={`hand ${hidden}`}><span></span></div>
                 </div>
-                <div className="face">
+                <div className="stop-start">
+                    <p>{faceTime}</p>
                     <h1>
                         <button onClick={stopTimer}>Stop</button>
                         <span> | </span>
                         <button onClick={restartTimer}>Start</button>
                     </h1>
-
-                    <p>{faceTime}</p>
                 </div>
             </div>
         </div>);
