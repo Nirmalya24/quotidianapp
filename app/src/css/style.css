@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=fallback');
+@import url("https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400");
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -11,6 +12,8 @@
 
 @import 'tailwindcss/utilities';
 
+/* Comfortaa Font */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
     .rtl {
@@ -21,4 +24,14 @@
 /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
 [x-cloak=""] {
     display: none;
+}
+/* Weather Widget */
+@layer components {
+    .side-rotate {
+        @apply absolute inset-y-0 right-0 w-16 origin-center -rotate-90 h-fit mt-8 text-lg;
+    }
+}
+
+.card.image-full:before {
+    @apply opacity-40;
 }
