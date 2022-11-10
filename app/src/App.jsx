@@ -19,7 +19,7 @@ import ProductivityDashboard from "./partials/ProductivityDashboard";
 import ScheduleDashboard from "./partials/ScheduleDashboard";
 import Settings from "./partials/Settings";
 import Timer from "./partials/Timer";
-
+import "./css/widget-css/global.css";
 function App() {
   const location = useLocation();
 
