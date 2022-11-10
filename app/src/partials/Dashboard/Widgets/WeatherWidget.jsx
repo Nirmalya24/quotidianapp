@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sunset from "../../../images/sunset.jpeg";
 import axios from "axios";
+
 function WeatherWidget() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
