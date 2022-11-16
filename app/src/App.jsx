@@ -12,7 +12,7 @@ import AOS from 'aos';
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import DashboardMain from "./partials/Dashboard/DashboardMain";
+import DashboardMain from "./partials/Dashboard/Pages/DashboardMain";
 import NewsDashboard from "./partials/Dashboard/Pages/NewsDashboard";
 import ProductivityDashboard from "./partials/Dashboard/Pages/ProductivityDashboard";
 import ScheduleDashboard from "./partials/Dashboard/Pages/ScheduleDashboard";
