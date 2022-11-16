@@ -1,5 +1,5 @@
 import React from "react";
-import MindmapWidget from "../Widgets/MindmapWIdget";
+import MindmapWidget from "../Widgets/MindmapWidget";
 
 function MindmapDashboard() {
   return (
