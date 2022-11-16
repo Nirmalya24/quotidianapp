@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import googleOneTap from "google-one-tap";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 const options = {
   client_id: import.meta.env.VITE_CLIENT_ID,
@@ -9,6 +10,9 @@ const options = {
   context: "use",
 };
 
+const URL = "https://quotidianapp-dev.up.railway.app";
+// const URL = "http://localhost:5001";
+
 function GoogleButton() {
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
@@ -16,25 +20,27 @@ function GoogleButton() {
       : null
   );
 
-  useEffect(() => {
-    if (!loginData) {
-      googleOneTap(options, async (response) => {
-        console.log(response);
-        const res = await fetch("/api/google-login", {
-          method: "POST",
-          body: JSON.stringify({
-            token: response.credential,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  console.log("Login data:", loginData);
 
-        const data = await res.json();
-        setLoginData(data);
-        localStorage.setItem("loginData", JSON.stringify(data));
+  useEffect(() => {
+    // if (!loginData) {
+    googleOneTap(options, async (response) => {
+      console.log("Response from Google:", response);
+      const res = await fetch(`${URL}/api/google-login`, {
+        method: "POST",
+        body: JSON.stringify({
+          token: response.credential,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-    }
+
+      const data = await res.json();
+      setLoginData(data);
+      localStorage.setItem("loginData", JSON.stringify(data));
+    });
+    // }
   }, [loginData]);
 
   const handleLogout = () => {
@@ -60,24 +66,24 @@ function GoogleButton() {
   //   document.getElementById("google-signout-button").classList.remove("hidden");
   // }
 
-  // // Global google
-  // useEffect(() => {
-  //   google.accounts.id.initialize({
-  //     client_id:
-  //       "321432838940-6b0v4vec649gq9iflbl0cfupn7vp47ql.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse,
-  //     ux_mode: "popup",
-  //     allowed_parent_origins: ["http://localhost:5173", "http://localhost"],
-  //     context: "use",
-  //   });
+  // Global google
+  useEffect(() => {
+    if (!loginData) {
+      google.accounts.id.initialize({
+        client_id:
+          "321432838940-6b0v4vec649gq9iflbl0cfupn7vp47ql.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+        ux_mode: "popup",
+        allowed_parent_origins: ["http://localhost:5173", "http://localhost"],
+        context: "use",
+      });
 
-  //   google.accounts.id.renderButton(
-  //     document.getElementById("google-signin-button"),
-  //     { theme: "outline", size: "medium", type: "standard" }
-  //   );
-
-  //   google.accounts.id.prompt(); // display the One Tap dialog
-  // }, []);
+      google.accounts.id.renderButton(
+        document.getElementById("google-signin-button"),
+        { theme: "outline", size: "medium", type: "standard" }
+      );
+    }
+  }, []);
 
   return (
     <>
