@@ -10,12 +10,18 @@ import './css/style.css';
 
 import AOS from 'aos';
 
-import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import ResetPassword from './pages/ResetPassword';
-import Test from "./pages/Test";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import DashboardMain from "./partials/Dashboard/Pages/DashboardMain";
+import NewsDashboard from "./partials/Dashboard/Pages/NewsDashboard";
+import ProductivityDashboard from "./partials/Dashboard/Pages/ProductivityDashboard";
+import ScheduleDashboard from "./partials/Dashboard/Pages/ScheduleDashboard";
+import Settings from "./partials/Dashboard/Pages/SettingsDashboard";
+import WeatherDashboard from "./partials/Dashboard/Pages/WeatherDashboard";
+import MindmapDashboard from "./partials/Dashboard/Pages/MindmapDashboard";
 
+import "./css/widget-css/global.css";
+import "./css/widget-css/weather.css";
 
 function App() {
   const location = useLocation();
@@ -39,10 +45,15 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="" element={<DashboardMain />} />
+          <Route path="news" element={<NewsDashboard />} />
+          <Route path="productivity" element={<ProductivityDashboard />} />
+          <Route path="schedule" element={<ScheduleDashboard />} />
+          <Route path="weather" element={<WeatherDashboard />} />
+          <Route path="mindmap" element={<MindmapDashboard />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
       </Routes>
     </>
   );

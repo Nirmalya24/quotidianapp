@@ -1,0 +1,320 @@
+/************ SIDE BAR **************/
+/* Widget Page Menu bar */
+.burger {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.menubar-open {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 310px;
+    transform: translateY(0%);
+    transition: all 0.4s;
+    overflow-y: auto;
+}
+
+/* Widget Page Theme bar */
+.themebar-open {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 310px;
+    transform: translateY(0%);
+    transition: all 0.4s;
+    overflow-y: auto;
+}
+
+.bar-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem 0rem;
+}
+
+/* Widget Page Widget bar */
+.widgetbar-open {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 310px;
+    transform: translateY(0%);
+    transition: all 0.4s;
+    overflow-y: auto;
+}
+
+/************ DRAG DROP **************/
+/* Widget Drag-drop */
+.container {
+    display: flex;
+    touch-action: none;
+    width: 800px;
+    margin: 1rem auto;
+}
+
+.dropzone {
+    flex: 1;
+    height: 400px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+.dropzone.left {
+    margin-right: 10px;
+}
+
+.grid-item {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.grid-item-content {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    background: #08e;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    border-radius: 50%;
+}
+
+
+/************ Widget Target Box **************/
+.targetbox-widgets {
+    width: 10%;
+}
+
+.dropped-widget {
+    padding: 1rem;
+}
+
+
+/************ Widget Target Rearrange **************/
+.widgets {
+    align-items: center;
+    border: solid 2px #a31919;
+    border-radius: .2em;
+    padding: .5em .5em .5em .5em;
+    margin-bottom: 1em;
+}
+
+/************ Widget Timer **************/
+
+.timer-group {
+    position: relative;
+    color: orange;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    height: 25rem;
+        width: 25rem;
+}
+
+.stop-start {
+    background: rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    height: 18.5rem;
+    left: 3.25rem;
+    padding: 12rem 2.5rem 0;
+    position: absolute;
+    width: 18.5rem;
+    text-align: center;
+    top: 3.25rem;
+}
+
+.stop-start h1 {
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.stop-start p {
+    border-radius: 1.25rem;
+    font-size: 4.75rem;
+    font-weight: 400;
+    position: absolute;
+    top: 4rem;
+    width: 16.25rem;
+    left: 1.25rem;
+}
+
+.paused {
+    border-radius: 50%;
+    background-color: rgba(157, 247, 66, 0.759);
+    height: 25rem;
+    width: 25rem;
+}
+
+.timer {
+    border-radius: 50%;
+    height: 6.25%;
+    overflow: hidden;
+    position: absolute;
+    width: 6.25%;
+}
+
+.timer:after {
+    background: #111;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 5%;
+    left: 0.625%;
+    position: absolute;
+    width: 5%;
+    top: 0.625%;
+}
+
+.timer .hand {
+    float: left;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 50%;
+}
+
+.timer .hand span {
+    border: 3.125rem solid rgba(0, 255, 255, .4);
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 50%;
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: rotate(225deg);
+    width: 0;
+}
+
+.timer .hand:first-child {
+    transform: rotate(180deg);
+}
+
+.timer .hand span {
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.timer .hand:first-child span {
+    animation-name: spin1;
+}
+
+.timer .hand:last-child span {
+    animation-name: spin2;
+}
+
+.timer.hour {
+    background: rgba(0, 0, 0, .3);
+    height: 25rem;
+    left: 0;
+    width: 25rem;
+    top: 0;
+}
+
+.timer.hour .hand span {
+    animation-duration: 3600s;
+    border-top-color: rgba(255, 0, 255, .4);
+    border-right-color: rgba(255, 0, 255, .4);
+    border-width: 12.5rem;
+}
+
+.timer.hour:after {
+    height: 22.5rem;
+    left: 1.25rem;
+    width: 22.5rem;
+    top: 1.25rem;
+}
+
+.timer.minute {
+    background: rgba(0, 0, 0, .2);
+    height: 21.875rem;
+    left: 1.563rem;
+    width: 21.875rem;
+    top: 1.563rem;
+}
+
+.timer.minute .hand span {
+    animation-duration: 60s;
+    border-top-color: rgba(0, 255, 255, .4);
+    border-right-color: rgba(0, 255, 255, .4);
+    border-width: 10.938rem;
+}
+
+.timer.minute:after {
+    height: 19.375rem;
+    left: 1.25rem;
+    width: 19.375rem;
+    top: 1.25rem;
+}
+
+.timer.second {
+    background: rgba(0, 0, 0, .2);
+    height: 18.75rem;
+    left: 3.125rem;
+    width: 18.75rem;
+    top: 3.125rem;
+}
+
+.timer.second .hand span {
+    animation-duration: 1s;
+    border-top-color: rgba(255, 255, 255, .15);
+    border-right-color: rgba(255, 255, 255, .15);
+    border-width: 9.375rem;
+}
+
+.timer.second:after {
+    height: 18.5rem;
+    left: 0.125rem;
+    width: 18.5rem;
+    top: 0.125rem;
+}
+
+.face {
+    background: rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    height: 18.5rem;
+    width: 18.5rem;
+    left: 3.25rem;
+    ;
+    margin-top: 3.25rem;
+    ;
+    padding: 10.313rem 2.5rem 0;
+    position: absolute;
+    text-align: center;
+}
+
+@keyframes spin1 {
+    0% {
+        transform: rotate(225deg);
+    }
+
+    50% {
+        transform: rotate(225deg);
+    }
+
+    100% {
+        transform: rotate(405deg);
+    }
+}
+
+@keyframes spin2 {
+    0% {
+        transform: rotate(225deg);
+    }
+
+    50% {
+        transform: rotate(405deg);
+    }
+
+    100% {
+        transform: rotate(405deg);
+    }
+}
