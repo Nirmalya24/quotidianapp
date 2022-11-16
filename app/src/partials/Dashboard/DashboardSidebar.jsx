@@ -35,6 +35,11 @@ function DashboardSidebar() {
       src: <Emoji symbol="🌤" label="Weather" />,
       link: "/dashboard/weather",
     },
+    {
+      title: "Mindmap",
+      src: <Emoji symbol="🧠" label="Weather" />,
+      link: "/dashboard/mindmap",
+    },
 
     {
       title: "Widget Drawer",
@@ -95,6 +100,7 @@ function DashboardSidebar() {
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
            border-2 rounded-full z-10 ${!open && "rotate-180"}`}
           onClick={openMenuCloseDrawer}
+          alt={"Control"}
         />
         <div className="flex gap-x-4 items-center">
           <img
@@ -102,6 +108,7 @@ function DashboardSidebar() {
             className={`cursor-pointer duration-500 ${
               open && "rotate-[360deg]"
             }`}
+            alt={"Menubar cursor"}
           />
           <h1
             className={`text-white origin-left font-medium text-xl duration-200 ${

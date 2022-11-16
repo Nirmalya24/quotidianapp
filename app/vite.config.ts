@@ -11,19 +11,19 @@ export default defineConfig({
     postcss,
   },
   plugins: [react()],
-  resolve: {
-    alias: [
-      {
-        find: /^~.+/,
-        replacement: (val) => {
-          return val.replace(/^~/, "");
-        },
-      },
-    ],
-  },
+  // resolve: {
+  //   alias: [
+  //     {
+  //       find: /^~.+/,
+  //       replacement: (val) => {
+  //         return val.replace(/^~/, "");
+  //       },
+  //     },
+  //   ],
+  // },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true,
     }
-  } 
+  }
 })

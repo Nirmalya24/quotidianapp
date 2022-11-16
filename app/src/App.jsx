@@ -18,6 +18,7 @@ import ProductivityDashboard from "./partials/Dashboard/Pages/ProductivityDashbo
 import ScheduleDashboard from "./partials/Dashboard/Pages/ScheduleDashboard";
 import Settings from "./partials/Dashboard/Pages/SettingsDashboard";
 import WeatherDashboard from "./partials/Dashboard/Pages/WeatherDashboard";
+import MindmapDashboard from "./partials/Dashboard/Pages/MindmapDashboard";
 
 import "./css/widget-css/global.css";
 import "./css/widget-css/weather.css";
@@ -50,6 +51,7 @@ function App() {
           <Route path="productivity" element={<ProductivityDashboard />} />
           <Route path="schedule" element={<ScheduleDashboard />} />
           <Route path="weather" element={<WeatherDashboard />} />
+          <Route path="mindmap" element={<MindmapDashboard />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
