@@ -1,7 +1,11 @@
+.news-page {
+    overflow-x: auto;
+}
+
 .news-title {
     text-align: center;
-    margin: 2em 0;
-    font-size: 2em;
+    margin: 1em 0;
+    font-size: 1.5em;
 }
 
 .news-menu {
@@ -41,7 +45,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
-    justify-content: center;
     justify-items: center;
     max-width: 100%;
     margin: 0 auto;
@@ -51,7 +54,7 @@
 .article {
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    width: 25em;
+    width: fit-content;
     border-radius: 8px;
     overflow: hidden;
     text-decoration: none;
