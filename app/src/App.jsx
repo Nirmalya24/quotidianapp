@@ -22,6 +22,7 @@ import MindmapDashboard from "./partials/Dashboard/Pages/MindmapDashboard";
 
 import "./css/widget-css/global.css";
 import "./css/widget-css/weather.css";
+import "./css/widget-css/news.css";
 
 function App() {
   const location = useLocation();
