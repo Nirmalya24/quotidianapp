@@ -41,10 +41,11 @@ app.post("/test", (req, res) => {
  *
  */
 app.post("/api/google-login", async (req, res) => {
-  const tokenReceived = req.body.token;
+  console.log(req.body);
+  const tokenReceived = req.body.body.token;
   console.log("Received request");
   console.log("Verifying token...");
-  const payload = await prismaQueries.verifyToken(req.body.token);
+  const payload = await prismaQueries.verifyToken(tokenReceived);
   console.log("Payload:", payload);
   const { name, family_name, given_name, email, sub } = payload;
   await prismaQueries.upsertUser(payload, tokenReceived);
