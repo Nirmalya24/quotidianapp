@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { OAuth2Client } = require("google-auth-library");
+
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
@@ -8,7 +8,7 @@ const app = express();
 const prismaQueries = require("./prismaQueries");
 
 dotenv.config(); // Load environment variables from .env file
-const client = new OAuth2Client(process.env.CLIENT_ID); // Google OAuth2 client
+
 
 app.use(helmet()); // Set security HTTP headers
 app.use(cors()); // Enable CORS

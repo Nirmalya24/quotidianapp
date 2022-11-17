@@ -1,3 +1,5 @@
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.CLIENT_ID); // Google OAuth2 client
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const { v4: uuid } = require("uuid");
