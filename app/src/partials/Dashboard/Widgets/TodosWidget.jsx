@@ -3,9 +3,11 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 
 function TodosWidget() {
-  const URL = "https://quotidianapp-dev.up.railway.app/api";
-  //   const URL = "http://localhost:5001/api";
-  const [email, setEmail] = useState(localStorage.getItem("loginData").email);
+  //   const URL = "https://quotidianapp-dev.up.railway.app/api";
+  const URL = "http://localhost:5001/api";
+  const [email, setEmail] = useState(
+    JSON.parse(localStorage.getItem("loginData")).email
+  );
   const [currentTodo, setCurrentTodo] = useState("");
 
   const [todos, setTodos] = useState(
@@ -24,19 +26,12 @@ function TodosWidget() {
       });
   }, []);
 
-  // useEffect to update the todos in localStorage
-  useEffect(() => {
-    console.log("Settings todos in localStorage:", todos);
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
   const fetchTodoItems = async () => {
     // GET request with email as body parameter
-    const response = await axios.get(`${URL}/getTodoItems`, {
-      body: {
-        email: JSON.parse(localStorage.getItem("loginData")).email,
-      },
-    });
+    console.log("Fetching todos for:", email);
+    const response = await axios.get(`${URL}/getTodoItems/${email}`);
+
+    console.log("Response from server:", response);
     if (response.status === 200) {
       setTodos(response.data);
     }
@@ -79,11 +74,20 @@ function TodosWidget() {
     }
   };
 
-  function completeTodo(index) {
-    let todosArray = [...todos];
-    todosArray[index].completed = !todosArray[index].completed;
-    setTodos(todosArray);
-  }
+  const updateTodoItem = async (todoId) => {
+    // PATCH request with todoId as path parameters
+    console.log("Updating todo item");
+    const response = await axios.patch(`${URL}/updateTodoItem/${todoId}`);
+    console.log("Response:", response);
+    if (response.status === 200) {
+      // update the local todos state
+      let todosArray = [...todos];
+      let index = todosArray.findIndex((todo) => todo.todoId === todoId);
+      todosArray[index].completed = !todosArray[index].completed;
+      setTodos(todosArray);
+      console.log("Todo item updated successfully");
+    }
+  };
 
   return (
     <div className="form-control w-full max-w-xs">
@@ -105,29 +109,30 @@ function TodosWidget() {
         }}
       ></input>
 
-      {todos.map((todo, index) => (
-        <div key={todo.todoId} className="flex items-center py-1">
-          <input
-            type="checkbox"
-            className="checkbox-success mx-2 cursor-pointer"
-            checked={todo.completed}
-            onClick={() => completeTodo(index)}
-            readOnly
-            // onChange={() => {
-            //   todos[index].completed = !todos[index].completed;
-            // }}
-          />
-          <div className={`grow ${todo.completed ? "line-through" : ""}`}>
-            {todo.description}
+      {todos &&
+        todos.map((todo) => (
+          <div key={todo.todoId} className="flex items-center py-1">
+            <input
+              type="checkbox"
+              className="checkbox-success mx-2 cursor-pointer"
+              checked={todo.completed}
+              onClick={() => updateTodoItem(todo.todoId)}
+              readOnly
+              // onChange={() => {
+              //   todos[index].completed = !todos[index].completed;
+              // }}
+            />
+            <div className={`grow ${todo.completed ? "line-through" : ""}`}>
+              {todo.description}
+            </div>
+            <div
+              onClick={() => deleteTodoItem(todo.todoId)}
+              className="cursor-pointer"
+            >
+              &#128465;
+            </div>
           </div>
-          <div
-            onClick={() => deleteTodoItem(todo.todoId)}
-            className="cursor-pointer"
-          >
-            &#128465;
-          </div>
-        </div>
-      ))}
+        ))}
       {todos.length > 0 && `${todos.length} items`}
     </div>
   );
