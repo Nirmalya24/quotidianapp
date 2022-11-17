@@ -153,8 +153,15 @@ app.post("/api/google-login", async (req, res) => {
 
 app.delete("/api/deleteTodoItem/:id", async (req, res) => {
   const todoId = req.params.id;
-  await deleteTodo(todoId);
-  res.status(200);
+  console.log("[TODO] Delete TodoItem:", todoId);
+  await deleteTodo(todoId)
+    .then(() => {
+      console.log("TodoItem Deleted");
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log("Error deleting todoItem: ", e.meta.cause);
+    });
 });
 
 /*
@@ -163,13 +170,18 @@ app.delete("/api/deleteTodoItem/:id", async (req, res) => {
 app.patch("/api/updateTodoItem", async (req, res) => {
   const { email, todoItem } = req.body;
   const todo = await updateTodos(todoItem);
-    res.status(200);
+  res.status(200);
 });
 
 app.post("/api/addTodoItem", async (req, res) => {
-  const { email, todo } = req.body;
+  console.log("Adding todoItem");
+  // console.log(req.body.body);
+  const { email, todo } = req.body.body;
+  console.log("Email: ", email);
+  console.log("Todo: ", todo);
   await addTodo(email, todo);
-  res.status(200);
+  console.log("TodoItem added");
+  res.sendStatus(200);
 });
 
 app.get("/api/getTodoItems/", async (req, res) => {
