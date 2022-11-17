@@ -108,6 +108,10 @@ const deleteTodo = async (todoId) => {
   });
 };
 
+
+
+// Mindmap queries
+
 const addDefaultNode = async (email) => {
   console.log("Creating a default node");
   const defaultNode = {
@@ -129,7 +133,6 @@ const addDefaultNode = async (email) => {
   ];
 };
 
-// Mindmap queries
 const getNodes = async (email) => {
   return await prisma.nodes.findMany({
     where: {
@@ -142,19 +145,12 @@ const getNodes = async (email) => {
       position: true,
     },
   });
-
-  // TODO: Default Node gets created regardless of whether the user has any nodes or not
 };
 
-const getEdges = async (email) => {
-  return await prisma.edges.findMany({
+const deleteNode = async (nodeId) => {
+  return await prisma.nodes.delete({
     where: {
-      email: email,
-    },
-    select: {
-      edgeId: true,
-      source: true,
-      target: true,
+      nodeId: nodeId,
     },
   });
 };
@@ -190,7 +186,19 @@ const updateNode = async (node) => {
   });
 };
 
-// TODO: Edges are not being dected on the frontend
+const getEdges = async (email) => {
+  return await prisma.edges.findMany({
+    where: {
+      email: email,
+    },
+    select: {
+      edgeId: true,
+      source: true,
+      target: true,
+    },
+  });
+};
+
 const upsertEdge = async (email, edge) => {
   return await prisma.edges.upsert({
     where: {
@@ -209,6 +217,14 @@ const upsertEdge = async (email, edge) => {
   });
 };
 
+const deleteEdge = async (edgeId) => {
+  return await prisma.edges.delete({
+    where: {
+      edgeId: edgeId,
+    },
+  });
+};
+
 module.exports = {
   verifyToken,
   upsertUser,
@@ -223,4 +239,6 @@ module.exports = {
   upsertEdge,
   addDefaultNode,
   updateNode,
+  deleteNode,
+  deleteEdge,
 };

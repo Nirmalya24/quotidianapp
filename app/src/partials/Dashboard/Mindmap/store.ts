@@ -13,7 +13,7 @@ import {
     applyNodeChanges,
     applyEdgeChanges,
 } from "reactflow";
-
+import { v4 as uuid } from "uuid";
 import initialNodes from "./nodes";
 import initialEdges from "./edges";
 import nodes from "./nodes";
@@ -29,6 +29,7 @@ export type NodeData = {
 export type EdgeData = {};
 
 const URL = import.meta.env.VITE_API_URL;
+// const URL = "http://localhost:5001/api";
 const email: string = localStorage.getItem("loginData")
     ? JSON.parse(localStorage.getItem("loginData") || "").email
     : "";
@@ -56,7 +57,7 @@ const updateNode = async (node: Node<NodeData>) => {
     return response.data;
 };
 
-const upsertEdge = async (edge: Edge<EdgeData>) => {
+const upsertEdge = async (edge: any) => {
     console.log("upsertEdge", edge);
     const response = await axios.patch(`${URL}/edges/`, {
         body: {
@@ -75,9 +76,23 @@ const getNodes = async (): Promise<Node<NodeData>[]> => {
     return response.data;
 };
 
+const deleteNodeInDB = async (nodeId: string) => {
+    console.log("deleteNode", nodeId);
+    const response = await axios.delete(`${URL}/nodes/${nodeId}`);
+    console.log("deleteNode", response.data);
+    return response.data;
+};
+
 const getEdges = async () => {
     const response = await axios.get(`${URL}/edges/${email}`);
     console.log("getEdges Response", response.data);
+    return response.data;
+};
+
+const deleteEdgeInDB = async (edgeId: string) => {
+    console.log("deleteEdge", edgeId);
+    const response = await axios.delete(`${URL}/edges/${edgeId}`);
+    console.log("deleteEdge", response.data);
     return response.data;
 };
 
@@ -111,6 +126,14 @@ const useStore = create<RFState>((set, get) => ({
         console.log("onNodeDelete", changes);
     },
     onEdgesChange: (changes: EdgeChange[]) => {
+        // This method is called when edge(s) are selected to removed
+
+        // iterate over the changes and select the edge that was removed
+        changes.forEach(async (change) => {
+            if (change.type === "remove") {
+                await deleteEdgeInDB(change.id);
+            }
+        });
         console.log("onEdgesChange", changes);
         set({
             edges: applyEdgeChanges(changes, get().edges),
@@ -121,6 +144,13 @@ const useStore = create<RFState>((set, get) => ({
         updateNode(node);
     },
     onConnect: (connection: Connection) => {
+        console.log("onConnect", connection);
+        const edge = {
+            id: uuid(),
+            source: connection.source,
+            target: connection.target,
+        }
+        upsertEdge(edge);
         set({
             edges: addEdge(connection, get().edges),
         });
@@ -139,8 +169,9 @@ const useStore = create<RFState>((set, get) => ({
             }),
         });
     },
-    deleteNode: (nodeId: string) => {
+    deleteNode: async (nodeId: string) => {
         console.log("deleteNode", nodeId);
+        const deletedNodes = await deleteNodeInDB(nodeId);
         set({
             nodes: get().nodes.filter((node) => node.id !== nodeId),
             edges: get().edges.filter(

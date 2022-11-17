@@ -199,11 +199,31 @@ app.post("/api/nodes/", async (req, res) => {
 });
 
 /**
+ * Delete a mindmap node
+ * 
+ */
+app.delete("/api/nodes/:id", async (req, res) => {
+  const nodeId = req.params.id;
+  console.log("[MINDMAP] Delete node:", nodeId);
+  await prismaQueries.deleteNode(nodeId)
+    .then(() => {
+      console.log("[MINDMAP] Delete node Success");
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log("[MINDMAP] Error deleting node: ", e);
+      res.sendStatus(500);
+    });
+  
+  
+});
+
+/**
  * Update a mindmap edge
  * @param {string} email - The user's email
  */
 app.patch("/api/edges/", async (req, res) => {
-  const {email, edge} = req.body.body;
+  const { email, edge } = req.body.body;
   console.log("[MINDMAP] Update edge:", email, edge);
   await prismaQueries
     .upsertEdge(email, edge)
@@ -212,8 +232,19 @@ app.patch("/api/edges/", async (req, res) => {
       res.sendStatus(200);
     })
     .catch((e) => {
-      console.log("[MINDMAP] Error updating edge: ", e.meta.cause);
+      console.log("[MINDMAP] Error updating edge: ", e);
     });
+});
+
+/**
+ * Delete a mindmap edge
+ */
+app.delete("/api/edges/:id", async (req, res) => {
+  const edgeId = req.params.id;
+  console.log("[MINDMAP] Delete edge:", edgeId);
+  await prismaQueries.deleteEdge(edgeId);
+  console.log("[MINDMAP] Delete edge Success");
+  res.sendStatus(200);
 });
 
 app.listen(process.env.PORT || 5001, () => {

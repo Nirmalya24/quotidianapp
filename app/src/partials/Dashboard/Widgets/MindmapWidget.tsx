@@ -22,7 +22,7 @@ const edgeTypes = {
 }
 
 
-function MindmapWidget() {
+const MindmapWidget = React.memo(function MindmapWidget() {
     const reactFlowWrapper = useRef(null);
     const connectingNodeId = useRef(null);
     const { project } = useReactFlow();
@@ -69,7 +69,7 @@ function MindmapWidget() {
     );
 
     return (
-        <div className="h-full flex grow" ref={ reactFlowWrapper}>
+        <div className="h-full flex grow" ref={reactFlowWrapper}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -98,7 +98,7 @@ function MindmapWidget() {
             </ReactFlow>
         </div>
     );
-}
+});
 
 export default () => (
     <ReactFlowProvider>
