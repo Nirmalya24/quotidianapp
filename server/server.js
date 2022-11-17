@@ -4,8 +4,8 @@ const { OAuth2Client } = require("google-auth-library");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+// prismaQueries.js
+const prismaQueries = require("./prismaQueries");
 
 dotenv.config(); // Load environment variables from .env file
 const client = new OAuth2Client(process.env.CLIENT_ID); // Google OAuth2 client
@@ -13,111 +13,6 @@ const client = new OAuth2Client(process.env.CLIENT_ID); // Google OAuth2 client
 app.use(helmet()); // Set security HTTP headers
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Parse JSON bodies
-
-/**
- * @param {string} token
- * @returns {Promise<import("google-auth-library").LoginTicket>}
- * Sends a request to the Google OAuth2 API to verify the token
- * and returns the response.
- **/
-const verifyToken = async (token) => {
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: process.env.CLIENT_ID,
-  });
-  return ticket.getPayload();
-};
-
-/**
- * @param {object} user
- * @param {string} token
- * @returns {Promise<import("@prisma/client").User>}
- * Creates a new user in the database if the user does not exist.
- * If the user exists, it returns the user.
- */
-const upsertUser = async (user, token) => {
-  await prisma.user.upsert({
-    where: {
-      google_id: user.sub,
-    },
-    update: {
-      token: token,
-    },
-    create: {
-      email: user.email,
-      given_name: user.given_name,
-      family_name: user.family_name,
-      google_id: user.sub,
-      token: token,
-    },
-  });
-};
-
-/**
- * Gets the requested todoItem of the user
- */
-const getTodos = async (email, todoId) => {
-  return await prisma.todos.findMany({
-    where: {
-      email: email,
-      todoId: todoId,
-    },
-  });
-};
-
-const getAllTodods = async (email) => {
-  return await prisma.todos.findMany({
-    where: {
-      email: email,
-    },
-    select: {
-      todoId: true,
-      description: true,
-      completed: true,
-    },
-  });
-};
-
-/**
- * Update the todoItem of the user
- */
-const updateTodos = async (todoId) => {
-  // Get the todoItem
-  const todoItem = await prisma.todos.findUnique({
-    where: {
-      todoId: todoId,
-    },
-  });
-
-  // Update the todoItem
-  return await prisma.todos.update({
-    where: {
-      todoId: todoId,
-    },
-    data: {
-      completed: !todoItem.completed,
-    },
-  });
-};
-
-const addTodo = async (email, todoItem) => {
-  return await prisma.todos.create({
-    data: {
-      email: email,
-      todoId: todoItem.todoId,
-      description: todoItem.description,
-      completed: todoItem.completed,
-    },
-  });
-};
-
-const deleteTodo = async (todoId) => {
-  return await prisma.todos.delete({
-    where: {
-      todoId: todoId,
-    },
-  });
-};
 
 /**
  * Default route to check if the server is running
@@ -149,10 +44,10 @@ app.post("/api/google-login", async (req, res) => {
   const tokenReceived = req.body.token;
   console.log("Received request");
   console.log("Verifying token...");
-  const payload = await verifyToken(req.body.token);
+  const payload = await prismaQueries.verifyToken(req.body.token);
   console.log("Payload:", payload);
   const { name, family_name, given_name, email, sub } = payload;
-  await upsertUser(payload, tokenReceived);
+  await prismaQueries.upsertUser(payload, tokenReceived);
 
   res.header("Access-Control-Allow-Origin", "*");
   res.status(201);
@@ -166,7 +61,8 @@ app.post("/api/google-login", async (req, res) => {
 app.delete("/api/deleteTodoItem/:id", async (req, res) => {
   const todoId = req.params.id;
   console.log("[TODO] Delete TodoItem:", todoId);
-  await deleteTodo(todoId)
+  await prismaQueries
+    .deleteTodo(todoId)
     .then(() => {
       console.log("[TODO] Delete Success");
       res.sendStatus(200);
@@ -182,7 +78,7 @@ app.delete("/api/deleteTodoItem/:id", async (req, res) => {
 app.patch("/api/updateTodoItem/:id", async (req, res) => {
   const todoId = req.params.id;
   console.log("[TODO] Update TodoItem:", todoId);
-  const todo = await updateTodos(todoId);
+  const todo = await prismaQueries.updateTodos(todoId);
   console.log("[TODO] Update Success");
   res.sendStatus(200);
 });
@@ -192,7 +88,7 @@ app.post("/api/addTodoItem", async (req, res) => {
   console.log("[TODO] Add TodoItem:", email, todo);
   console.log("Email: ", email);
   console.log("Todo: ", todo);
-  await addTodo(email, todo);
+  await prismaQueries.addTodo(email, todo);
   console.log("TodoItem added");
   res.sendStatus(200);
 });
@@ -201,7 +97,8 @@ app.get("/api/getTodoItems/:email", async (req, res) => {
   const { email } = req.params;
   // console.log(req.body.body);
   console.log("[TODO] Get all TodoItems:", email);
-  const todoItems = await getAllTodods(email)
+  const todoItems = await prismaQueries
+    .getAllTodods(email)
     .then((data) => {
       console.log("[TODO] Get all TodoItems Success");
       res.status(200).json(data);
@@ -211,8 +108,115 @@ app.get("/api/getTodoItems/:email", async (req, res) => {
     });
 });
 
+/*
+Mindmap Routes
+*/
+
+/**
+ * Get all mindmap edges for a user
+ */
+app.get("/api/edges/:email", async (req, res) => {
+  const { email } = req.params;
+  console.log("[MINDMAP:EDGES] GET:", email);
+  const edges = await prismaQueries
+    .getEdges(email)
+    .then((data) => {
+      console.log("[MINDMAP:EDGES] GET Success");
+      console.log(data);
+      data.forEach((edge) => {
+        edge.id = edge.edgeId;
+        delete edge.edgeId;
+      });
+      res.status(200).json(data);
+    })
+    .catch((e) => {
+      console.log("[MINDMAP:EDGES] GET Error : ", e);
+    });
+});
+
+/**
+ * Get all mindmap nodes for a user
+ */
+app.get("/api/nodes/:email", async (req, res) => {
+  const { email } = req.params;
+  console.log("[MINDMAP:NODES] GET:", email);
+
+  // Get all nodes for a user
+  let nodes = await prismaQueries.getNodes(email);
+  // console.log(nodes)
+  // If there are no nodes, create a new node
+  if (nodes.length === 0) {
+    console.log("[MINDMAP:NODES] No nodes found. Creating new node.");
+    nodes = await prismaQueries.addDefaultNode(email);
+    console.log("[MINDMAP:NODES] New node created:", nodes);
+  } else {
+    console.log("[MINDMAP:NODES] GET Success");
+  }
+  nodes.forEach((node) => {
+    node.id = node.nodeId;
+    delete node.nodeId;
+  });
+  res.status(200).json(nodes);
+});
+
+/**
+ * Update a mindmap node
+ * @param {string} email - The user's email
+ *
+ */
+app.patch("/api/nodes/", async (req, res) => {
+  const {node} = req.body.body;
+  console.log("[MINDMAP] Update node:");
+  await prismaQueries
+    .updateNode(node)
+    .then(() => {
+      console.log("[MINDMAP] Update node Success");
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log("[MINDMAP] Error updating node: ", node, e);
+    });
+});
+
+/**
+ * Add a mindmap node
+ * @param {string} email - The user's email
+ *
+ */
+app.post("/api/nodes/", async (req, res) => {
+  const {email, node} = req.body.body;
+  console.log("[MINDMAP] Add node:", email, node);
+  await prismaQueries
+    .upsertNode(email, node)
+    .then(() => {
+      console.log("[MINDMAP] Add node Success");
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log("[MINDMAP] Error adding node: ", e);
+    });
+});
+
+/**
+ * Update a mindmap edge
+ * @param {string} email - The user's email
+ */
+app.patch("/api/edges/", async (req, res) => {
+  const {email, edge} = req.body.body;
+  console.log("[MINDMAP] Update edge:", email, edge);
+  await prismaQueries
+    .upsertEdge(email, edge)
+    .then(() => {
+      console.log("[MINDMAP] Update edge Success");
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log("[MINDMAP] Error updating edge: ", e.meta.cause);
+    });
+});
+
 app.listen(process.env.PORT || 5001, () => {
-    console.log(
-      `Server running on  http://localhost:${process.env.PORT || 5001}`
-    );
+  console.log(
+    `Server running on  http://localhost:${process.env.PORT || 5001}`
+  );
 });
