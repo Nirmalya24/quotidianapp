@@ -25,8 +25,7 @@ const verifyToken = async (token) => {
     idToken: token,
     audience: process.env.CLIENT_ID,
   });
-  const payload = ticket.getPayload();
-  return payload;
+  return ticket.getPayload();
 };
 
 /**
@@ -50,6 +49,60 @@ const upsertUser = async (user, token) => {
       family_name: user.family_name,
       google_id: user.sub,
       token: token,
+    },
+  });
+};
+
+/**
+ * Gets the requested todoItem of the user
+ */
+const getTodos = async (email, todoId) => {
+  return await prisma.todos.findMany({
+    where: {
+      email: email,
+      todoId: todoId,
+    },
+  });
+};
+
+const getAllTodods = async (email) => {
+  return await prisma.todos.findMany({
+    where: {
+      email: email,
+    },
+  });
+};
+
+/**
+ * Update the todoItem of the user
+ */
+const updateTodos = async (todoItem) => {
+  return await prisma.todos.update({
+    where: {
+      todoId: todoItem.todoId,
+    },
+    data: {
+      description: todoItem.description,
+      completed: todoItem.completed,
+    },
+  });
+};
+
+const addTodo = async (email, todoItem) => {
+  return await prisma.todos.create({
+    data: {
+      email: email,
+      todoId: todoItem.todoId,
+      description: todoItem.description,
+      completed: todoItem.completed,
+    },
+  });
+};
+
+const deleteTodo = async (todoId) => {
+  return await prisma.todos.delete({
+    where: {
+      todoId: todoId,
     },
   });
 };
@@ -94,8 +147,40 @@ app.post("/api/google-login", async (req, res) => {
   res.json({ name, email, tokenReceived });
 });
 
+/**
+ * Get a todoItem to be Deleted
+ */
+
+app.delete("/api/deleteTodoItem/:id", async (req, res) => {
+  const todoId = req.params.id;
+  await deleteTodo(todoId);
+  res.status(200);
+});
+
+/*
+ * Get a todoItem to be added/updated by the user from the database
+ */
+app.patch("/api/updateTodoItem", async (req, res) => {
+  const { email, todoItem } = req.body;
+  const todo = await updateTodos(todoItem);
+    res.status(200);
+});
+
+app.post("/api/addTodoItem", async (req, res) => {
+  const { email, todo } = req.body;
+  await addTodo(email, todo);
+  res.status(200);
+});
+
+app.get("/api/getTodoItems/", async (req, res) => {
+  const { email } = req.body;
+  const todoItems = await getAllTodods(email);
+  res.status(200);
+  res.json(todoItems);
+});
+
 app.listen(process.env.PORT || 5001, () => {
-  console.log(
-    `Server running on  http://localhost:${process.env.PORT || 5001}`
-  );
+    console.log(
+      `Server running on  http://localhost:${process.env.PORT || 5001}`
+    );
 });
