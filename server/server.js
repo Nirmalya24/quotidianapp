@@ -70,20 +70,32 @@ const getAllTodods = async (email) => {
     where: {
       email: email,
     },
+    select: {
+      todoId: true,
+      description: true,
+      completed: true,
+    },
   });
 };
 
 /**
  * Update the todoItem of the user
  */
-const updateTodos = async (todoItem) => {
+const updateTodos = async (todoId) => {
+  // Get the todoItem
+  const todoItem = await prisma.todos.findUnique({
+    where: {
+      todoId: todoId,
+    },
+  });
+
+  // Update the todoItem
   return await prisma.todos.update({
     where: {
-      todoId: todoItem.todoId,
+      todoId: todoId,
     },
     data: {
-      description: todoItem.description,
-      completed: todoItem.completed,
+      completed: !todoItem.completed,
     },
   });
 };
@@ -156,27 +168,28 @@ app.delete("/api/deleteTodoItem/:id", async (req, res) => {
   console.log("[TODO] Delete TodoItem:", todoId);
   await deleteTodo(todoId)
     .then(() => {
-      console.log("TodoItem Deleted");
+      console.log("[TODO] Delete Success");
       res.sendStatus(200);
     })
     .catch((e) => {
-      console.log("Error deleting todoItem: ", e.meta.cause);
+      console.log("[TODO] Error delete: ", e.meta.cause);
     });
 });
 
 /*
  * Get a todoItem to be added/updated by the user from the database
  */
-app.patch("/api/updateTodoItem", async (req, res) => {
-  const { email, todoItem } = req.body;
-  const todo = await updateTodos(todoItem);
-  res.status(200);
+app.patch("/api/updateTodoItem/:id", async (req, res) => {
+  const todoId = req.params.id;
+  console.log("[TODO] Update TodoItem:", todoId);
+  const todo = await updateTodos(todoId);
+  console.log("[TODO] Update Success");
+  res.sendStatus(200);
 });
 
 app.post("/api/addTodoItem", async (req, res) => {
-  console.log("Adding todoItem");
-  // console.log(req.body.body);
   const { email, todo } = req.body.body;
+  console.log("[TODO] Add TodoItem:", email, todo);
   console.log("Email: ", email);
   console.log("Todo: ", todo);
   await addTodo(email, todo);
@@ -184,11 +197,18 @@ app.post("/api/addTodoItem", async (req, res) => {
   res.sendStatus(200);
 });
 
-app.get("/api/getTodoItems/", async (req, res) => {
-  const { email } = req.body;
-  const todoItems = await getAllTodods(email);
-  res.status(200);
-  res.json(todoItems);
+app.get("/api/getTodoItems/:email", async (req, res) => {
+  const { email } = req.params;
+  // console.log(req.body.body);
+  console.log("[TODO] Get all TodoItems:", email);
+  const todoItems = await getAllTodods(email)
+    .then((data) => {
+      console.log("[TODO] Get all TodoItems Success");
+      res.status(200).json(data);
+    })
+    .catch((e) => {
+      console.log("[TODO] Error getting all TodoItems: ", e.meta.cause);
+    });
 });
 
 app.listen(process.env.PORT || 5001, () => {
