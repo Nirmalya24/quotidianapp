@@ -8,7 +8,7 @@ function DashboardMain() {
   return (
     <div className="widget-page">
       <h1 className="text-2xl font-semibold pt-7 pl-7">Widget Dashboard</h1>
-      <div className="item-grid">
+      <div className="item-grid grid-flow-row-dense">
 
         {/* Motivation Card */}
         <QuoteWidget />

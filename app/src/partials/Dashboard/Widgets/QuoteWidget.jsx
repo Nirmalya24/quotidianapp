@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IoMdRefreshCircle } from "react-icons/io";
+import { FaQuoteLeft } from "react-icons/fa";
+import { FaQuoteRight } from "react-icons/fa";
 
 function QuoteWidget() {
 
@@ -49,11 +51,21 @@ function QuoteWidget() {
                     (
                         <div className="card w-96 bg-primary text-primary-content ml-0 m-6">
                             <div className="card-body">
-                                <h2 className="card-title">{quote.content}</h2>
-                                <p className="text-center">{quote.author}</p>
+                                <div className="flex flex-row relative">
+                                    <div><FaQuoteLeft /></div>
+                                    <div className="mx-3">
+                                        <h2 className="card-title">{quote.content}</h2>
+                                    </div>
+                                    <div className="absolute bottom-0 right-0">
+                                        <FaQuoteRight />
+                                    </div>
+                                </div>
+                                <p className="text-center italic">
+                                    {quote.author}
+                                </p>
                                 <div className="card-actions justify-end">
                                     <IoMdRefreshCircle
-                                        className="text-3xl hover:animate-ping"
+                                        className="text-2xl hover:animate-ping"
                                         onClick={getQuote} />
                                 </div>
                             </div>
