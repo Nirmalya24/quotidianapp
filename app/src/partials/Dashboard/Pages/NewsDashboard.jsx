@@ -29,7 +29,7 @@ function NewsDashboard() {
   }, [category])
 
   return (
-    <div className="news-page">
+    <div className="widget-page">
       <h1 className="news-title">See the Latest News</h1>
       <nav className="news-menu">
         <ul>
@@ -44,7 +44,7 @@ function NewsDashboard() {
           ))}
         </ul>
       </nav>
-      <div className="news-grid">
+      <div className="item-grid">
         {items.map((item, i) => (
           <NewsItems key={i} item={item} />
         ))}

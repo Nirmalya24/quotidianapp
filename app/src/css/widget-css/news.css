@@ -1,4 +1,4 @@
-.news-page {
+.widget-page {
     overflow-x: auto;
 }
 
@@ -41,7 +41,7 @@
     background: #dddddd;
 }
 
-.news-grid {
+.item-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
@@ -113,13 +113,13 @@
 }
 
 @media screen and (max-width: 1330px) {
-    .news-grid {
+    .item-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media screen and (max-width: 900px) {
-    .news-grid {
+    .item-grid {
         grid-template-columns: 1fr;
     }
 }
