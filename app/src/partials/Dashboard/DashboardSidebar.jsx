@@ -26,11 +26,6 @@ function DashboardSidebar() {
       link: "/dashboard/productivity",
     },
     {
-      title: "Schedule",
-      src: <Emoji symbol="🗓️" label="Schedule" />,
-      link: "/dashboard/schedule",
-    },
-    {
       title: "Weather",
       src: <Emoji symbol="🌤" label="Weather" />,
       link: "/dashboard/weather",
