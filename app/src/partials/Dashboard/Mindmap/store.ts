@@ -35,7 +35,7 @@ const email: string = localStorage.getItem("loginData")
 
 const addNodeToDB = async (node: Node<NodeData>) => {
     console.log("addNode", node);
-    const response = await axios.post(`${URL}/api/nodes/`, {
+    const response = await axios.post(`${URL}/nodes/`, {
         body: {
             email: email,
             node: node,
@@ -47,7 +47,7 @@ const addNodeToDB = async (node: Node<NodeData>) => {
 
 const updateNode = async (node: Node<NodeData>) => {
     console.log("updateNode", node);
-    const response = await axios.patch(`${URL}/api/nodes/`, {
+    const response = await axios.patch(`${URL}/nodes/`, {
         body: {
             node: node,
         },
@@ -58,7 +58,7 @@ const updateNode = async (node: Node<NodeData>) => {
 
 const upsertEdge = async (edge: Edge<EdgeData>) => {
     console.log("upsertEdge", edge);
-    const response = await axios.patch(`${URL}/api/edges/`, {
+    const response = await axios.patch(`${URL}/edges/`, {
         body: {
             email: email,
             edge: edge,
@@ -70,13 +70,13 @@ const upsertEdge = async (edge: Edge<EdgeData>) => {
 };
 
 const getNodes = async (): Promise<Node<NodeData>[]> => {
-    const response = await axios.get(`${URL}/api/nodes/${email}`);
+    const response = await axios.get(`${URL}/nodes/${email}`);
     console.log("getNodes Response", response.data);
     return response.data;
 };
 
 const getEdges = async () => {
-    const response = await axios.get(`${URL}/api/edges/${email}`);
+    const response = await axios.get(`${URL}/edges/${email}`);
     console.log("getEdges Response", response.data);
     return response.data;
 };

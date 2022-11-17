@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import googleOneTap from "google-one-tap";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const options = {
   client_id: import.meta.env.VITE_CLIENT_ID,
@@ -10,8 +11,8 @@ const options = {
   context: "use",
 };
 
-const URL = "https://quotidianapp-dev.up.railway.app";
-// const URL = "http://localhost:5001";
+// const URL = "https://quotidianapp-dev.up.railway.app";
+const URL = import.meta.env.VITE_API_URL;
 
 function GoogleButton() {
   const [loginData, setLoginData] = useState(
@@ -26,17 +27,14 @@ function GoogleButton() {
     // if (!loginData) {
     googleOneTap(options, async (response) => {
       console.log("Response from Google:", response);
-      const res = await fetch(`${URL}/api/google-login`, {
-        method: "POST",
-        body: JSON.stringify({
+      const res = await axios.post(`${URL}/google-login`, {
+        body: {
           token: response.credential,
-        }),
-        headers: {
-          "Content-Type": "application/json",
         },
       });
 
-      const data = await res.json();
+      const data = await res.data;
+      console.log("Data from server:", data);
       setLoginData(data);
       localStorage.setItem("loginData", JSON.stringify(data));
     });
@@ -47,24 +45,6 @@ function GoogleButton() {
     localStorage.removeItem("loginData");
     setLoginData(null);
   };
-
-  // const [user, setUser] = useState(false);
-
-  // function handleSignout(e) {
-  //   setUser({});
-  //   document.getElementById("google-signin-button").classList.remove("hidden");
-  //   document.getElementById("google-signout-button").classList.add("hidden");
-  // }
-
-  // function handleCallbackResponse(response) {
-  //   // console.log("Encoded JWT response:", response);
-  //   let userObj = jwt_decode(response.credential);
-  //   console.log("Decoded JWT response:", userObj);
-  //   setUser(userObj);
-  //   // add class hidden to the button
-  //   document.getElementById("google-signin-button").classList.add("hidden");
-  //   document.getElementById("google-signout-button").classList.remove("hidden");
-  // }
 
   // Global google
   useEffect(() => {
@@ -93,10 +73,18 @@ function GoogleButton() {
       ></div>
       {loginData && <div>Welcome {loginData.name}</div>}
       {loginData && (
+        <Link
+          to="/dashboard"
+          className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out text-sm"
+        >
+          Go to Dashboard
+        </Link>
+      )}
+      {loginData && (
         <button
           id="google-signout-button"
           onClick={handleLogout}
-          className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out hidden"
+          className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
         >
           Sign out
         </button>
