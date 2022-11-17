@@ -9,24 +9,26 @@ function NewsItem({ item }) {
     const formatTime = formatDate.replace('Z', '')
 
     return (
-        <a href={item.url} className="article">
-            <div className="article-image">
-                <img src={item.urlToImage} alt={item.title} />
-            </div>
-            <div className="article-content">
-                <div className="article-source">
-                    <img src={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE, SIZE,
+        <a href={item.url}>
+            <div className="card max-w-lg bg-base-100 shadow-lg rounded-lg hover:shadow-2xl transition duration-300">
+                <figure><img src={item.urlToImage} alt={item.title} /></figure>
+                <div className="card-body">
+                    <h2 className="card-title">
+                        <h2>{item.title}</h2>
+                    </h2>
+                    <div className="article-source">
+                        <img src={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE, SIZE,
                     URL&url=http://${website}&size=16`} alt={item.source.id} />
-                    <span>{item.source.name}</span>
-                </div>
-                <div className="article-title">
-                    <h2>{item.title}</h2>
-                </div>
-                <p className="article-description">
-                    {item.description}
-                </p>
-                <div className="article-details">
-                    <small><b>Published At: </b>{formatTime}</small>
+                        <span>{item.source.name}</span>
+                    </div>
+                    <p>{item.description}</p>
+                    <div className="grid place-items-end">
+                        <div className="border border-solid border-black rounded-lg">
+                            <div className="px-2 inline-block text-xs">
+                                <div><b>Published At: </b>{formatTime}</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </a>
