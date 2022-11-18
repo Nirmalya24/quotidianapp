@@ -7,7 +7,7 @@ import QuoteBackground from "../../../images/quote.jpeg";
 
 function QuoteWidget() {
 
-    const quoteAPI = "http://api.quotable.io/random";
+    const quoteAPI = "https://api.quotable.io/random";
     const [quote, setQuote] = useState(
         localStorage.getItem("quote")
             ? JSON.parse(localStorage.getItem("quote"))
@@ -15,16 +15,16 @@ function QuoteWidget() {
     );
 
     useEffect(() => {
-        console.log("useEffect")
-        if (!quote) {
-            getQuote()
-        }
-        // let now = new Date()
-        let timePassed = new Date().getTime() - quote.timestamp
-        let seconds = Math.floor((timePassed / 1000) % 60)
-        if (quote && seconds > 86400) {
-            getQuote()
-        }
+      console.log("useEffect");
+      if (!quote) {
+        getQuote();
+      }
+      // let now = new Date()
+      // let timePassed = new Date().getTime() - quote.timestamp
+      // let seconds = Math.floor((timePassed / 1000) % 60)
+      // if (quote && seconds > 86400) {
+      //     getQuote()
+      // }
     }, []);
 
     const getQuote = async () => {

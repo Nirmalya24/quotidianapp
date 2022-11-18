@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=fallback');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
 /* tailwind */
 @import 'tailwindcss/base';
@@ -15,8 +16,6 @@
 
 @import 'tailwindcss/utilities';
 
-/* Comfortaa Font */
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
     .rtl {

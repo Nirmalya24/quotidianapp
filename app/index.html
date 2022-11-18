@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
     <title>Quotidian.app</title>
   </head>
   <body class="font-inter antialiased bg-white text-gray-900 tracking-tight">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
-        if (localStorage.getItem('sidebar-expanded') == 'true') {
+        if (localStorage.getItem('sidebar-expanded') === 'true') {
             document.querySelector('body').classList.add('sidebar-expanded');
         } else {
             document.querySelector('body').classList.remove('sidebar-expanded');
@@ -17,7 +18,11 @@
     </script>   
     <div id="root"></div>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="./src/main.jsx"></script>
+    <script>
+      const google = window.google;
+      console.log("Google loaded", google)
+    </script>
     
   </body>
 </html>
