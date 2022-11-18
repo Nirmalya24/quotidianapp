@@ -23,25 +23,19 @@ function GoogleButton() {
 
   console.log("Login data:", loginData);
 
-  useEffect(() => {
-    // if (!loginData) {
-    googleOneTap(options, async (response) => {
-      console.log("Response from Google:", response);
-      const res = await axios.post(`${URL}/google-login`, {
-        body: {
-          token: response.credential,
-        },
-      });
-
-      const data = await res.data;
-      console.log("Data from server:", data);
-      setLoginData(data);
-      localStorage.setItem("loginData", JSON.stringify(data));
-    });
-    // }
-  }, [loginData]);
+  function handleCallbackResponse(response) {
+    // console.log("Encoded JWT response:", response);
+    let userObj = jwt_decode(response.credential);
+    console.log("Decoded JWT response:", userObj);
+    setLoginData(userObj);
+    localStorage.setItem("loginData", JSON.stringify(userObj));
+    // add class hidden to the button
+    document.getElementById("google-signin-button").classList.add("hidden");
+    document.getElementById("google-signout-button").classList.remove("hidden");
+  }
 
   const handleLogout = () => {
+    console.log("Logging out...");
     localStorage.removeItem("loginData");
     setLoginData(null);
   };
@@ -71,6 +65,7 @@ function GoogleButton() {
         id="google-signin-button"
         className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
       ></div>
+
       {loginData && <div>Welcome {loginData.name}</div>}
       {loginData && (
         <Link
