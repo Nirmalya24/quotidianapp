@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
 import { subWidgets } from "./SubWidgets"
 import { StatefulSourceBox as SourceBox } from "./SourceBox";
+import { CiLogout } from "react-icons/ci";
 
 function DashboardSidebar() {
   const [open, setOpen] = useState(true);
@@ -75,8 +76,9 @@ function DashboardSidebar() {
   return (
     <div className="flex">
       <div
-        className={` ${open ? "w-72" : "w-20 "
-          } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
+        className={` ${
+          open ? "w-72" : "w-20 "
+        } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src={Control}
@@ -88,13 +90,15 @@ function DashboardSidebar() {
         <div className="flex gap-x-4 items-center">
           <img
             src={Logo}
-            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"
-              }`}
+            className={`cursor-pointer duration-500 ${
+              open && "rotate-[360deg]"
+            }`}
             alt={"Menubar cursor"}
           />
           <h1
-            className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
-              }`}
+            className={`text-white origin-left font-medium text-xl duration-200 ${
+              !open && "scale-0"
+            }`}
           >
             Quotidian.app
           </h1>
@@ -109,8 +113,9 @@ function DashboardSidebar() {
               >
                 <li
                   className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4
-              ${Menu.gap ? "mt-20" : "mt-2"} ${index === 0 && "bg-light-white"
-                    } `}
+              ${Menu.gap ? "mt-20" : "mt-2"} ${
+                    index === 0 && "bg-light-white"
+                  } `}
                 >
                   {Menu.src}
                   <span
@@ -125,9 +130,31 @@ function DashboardSidebar() {
                   )}
                 </li>
               </Link>
-              {Menu.submenu && submenuOpen && open && (<SourceBox />)}
+              {Menu.submenu && submenuOpen && open && <SourceBox />}
             </div>
           ))}
+          <Link
+            to={"/"}
+            relative="path"
+            onClick={(e) => {
+              localStorage.clear();
+              // window.location.reload();
+            }}
+          >
+            <li
+              className={
+                "flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4 mt-20"
+              }
+            >
+              <CiLogout />
+              <span className={`${!open && "hidden"} origin-left duration-200`}>
+                Logout
+              </span>
+              {/* {Menu.submenu && open && (
+                <BsChevronDown className={`${submenuOpen && "rotate-180"}`} />
+              )} */}
+            </li>
+          </Link>
         </ul>
       </div>
     </div>
