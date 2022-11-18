@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const axios = require("axios");
 const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
@@ -8,7 +8,6 @@ const app = express();
 const prismaQueries = require("./prismaQueries");
 
 dotenv.config(); // Load environment variables from .env file
-
 
 app.use(helmet()); // Set security HTTP headers
 app.use(cors()); // Enable CORS
@@ -166,7 +165,7 @@ app.get("/api/nodes/:email", async (req, res) => {
  *
  */
 app.patch("/api/nodes/", async (req, res) => {
-  const {node} = req.body.body;
+  const { node } = req.body.body;
   console.log("[MINDMAP] Update node:");
   await prismaQueries
     .updateNode(node)
@@ -185,7 +184,7 @@ app.patch("/api/nodes/", async (req, res) => {
  *
  */
 app.post("/api/nodes/", async (req, res) => {
-  const {email, node} = req.body.body;
+  const { email, node } = req.body.body;
   console.log("[MINDMAP] Add node:", email, node);
   await prismaQueries
     .upsertNode(email, node)
@@ -200,12 +199,13 @@ app.post("/api/nodes/", async (req, res) => {
 
 /**
  * Delete a mindmap node
- * 
+ *
  */
 app.delete("/api/nodes/:id", async (req, res) => {
   const nodeId = req.params.id;
   console.log("[MINDMAP] Delete node:", nodeId);
-  await prismaQueries.deleteNode(nodeId)
+  await prismaQueries
+    .deleteNode(nodeId)
     .then(() => {
       console.log("[MINDMAP] Delete node Success");
       res.sendStatus(200);
@@ -214,8 +214,6 @@ app.delete("/api/nodes/:id", async (req, res) => {
       console.log("[MINDMAP] Error deleting node: ", e);
       res.sendStatus(500);
     });
-  
-  
 });
 
 /**
@@ -245,6 +243,20 @@ app.delete("/api/edges/:id", async (req, res) => {
   await prismaQueries.deleteEdge(edgeId);
   console.log("[MINDMAP] Delete edge Success");
   res.sendStatus(200);
+});
+
+/**
+ * News Routes
+ */
+
+app.get("/api/news/:category", async (req, res) => {
+  const { category } = req.params;
+  console.log("[NEWS] GET:", category);
+  const URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=342e5a3a832e49e681b0a6c6f2665800`;
+  const news = await axios(URL).then((response) => {
+    console.log("[NEWS] GET Success");
+    res.status(200).json(response.data);
+  });
 });
 
 app.listen(process.env.PORT || 5001, () => {
