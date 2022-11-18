@@ -46,18 +46,18 @@ function App() {
   return (
     <>
       <DndProvider backend={HTML5Backend}>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="" element={<HomeDashboard />} />
-          <Route path="news" element={<NewsDashboard />} />
-          <Route path="productivity" element={<ProductivityDashboard />} />
-          <Route path="weather" element={<WeatherDashboard />} />
-          <Route path="mindmap" element={<MindmapDashboard />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-      </Routes>
-    </DndProvider>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="" element={<HomeDashboard />} />
+            <Route path="news" element={<NewsDashboard />} />
+            {/* <Route path="productivity" element={<ProductivityDashboard />} /> */}
+            <Route path="weather" element={<WeatherDashboard />} />
+            <Route path="mindmap" element={<MindmapDashboard />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </DndProvider>
     </>
   );
 }
