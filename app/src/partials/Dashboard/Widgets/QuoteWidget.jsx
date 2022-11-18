@@ -3,7 +3,7 @@ import axios from "axios";
 import { IoMdRefreshCircle } from "react-icons/io";
 import { FaQuoteLeft } from "react-icons/fa";
 import { FaQuoteRight } from "react-icons/fa";
-import QuoteBackground from "../../../images/quote_background.jpeg";
+import QuoteBackground from "../../../images/quote.jpeg";
 
 function QuoteWidget() {
 
