@@ -9,7 +9,6 @@ const style = {
 }
 
 const TargetBox = memo(function TargetBox({ onDrop, board }) {
-
   const [{ isOver, canDrop }, drop] = useDrop(
     () => ({
       accept: WIDGET_TYPE,
@@ -19,40 +18,32 @@ const TargetBox = memo(function TargetBox({ onDrop, board }) {
         canDrop: monitor.canDrop(),
       }),
     }),
-    [onDrop],
-  )
+    [onDrop]
+  );
 
   return (
     <div>
-      <div
-        ref={drop}
-        style={{ ...style }}
-        role="TargetBox"
-      >
+      <div ref={drop} style={{ ...style }} role="TargetBox" className="pl-7">
         {/* Rearrange widgets on the screen */}
         <TargetRearrange board={board} />
       </div>
     </div>
-  )
-})
+  );
+});
 
 export const StatefulTargetBox = (props) => {
   const [board, setBoard] = useState([]);
 
-  const addWidgetToBoard = useCallback((itemID) => {
-    const widgetToDrop = subWidgets.find((widget) => itemID === widget.id);
-    if (!board || !board.includes(widgetToDrop))
-      setBoard((board) => [...board, widgetToDrop]);
-    else
-      console.log("Adding duplicate widget is not allowed.")
-  }, [board])
+  const addWidgetToBoard = useCallback(
+    (itemID) => {
+      const widgetToDrop = subWidgets.find((widget) => itemID === widget.id);
+      if (!board || !board.includes(widgetToDrop))
+        setBoard((board) => [...board, widgetToDrop]);
+      else console.log("Adding duplicate widget is not allowed.");
+    },
+    [board]
+  );
 
-  return (
-    <TargetBox
-      {...props}
-      onDrop={addWidgetToBoard}
-      board={board}
-    />
-  )
-}
+  return <TargetBox {...props} onDrop={addWidgetToBoard} board={board} />;
+};
 
