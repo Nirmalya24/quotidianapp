@@ -6,8 +6,8 @@ export const WIDGET_TYPE = 'widget'
 export const subWidgets = [
     {
         id: "sub1",
-        title: "Mindmap",
-        icon: <Emoji symbol="🧠" label="Mindmap" />,
+        title: "Weather",
+        icon: <Emoji symbol="🌤" label="Weather" />,
     },
     {
         id: "sub2",
@@ -26,16 +26,6 @@ export const subWidgets = [
     },
     {
         id: "sub5",
-        title: "News",
-        icon: <Emoji symbol="🌎" label="News" />,
-    },
-    {
-        id: "sub6",
-        title: "Weather",
-        icon: <Emoji symbol="🌤" label="Weather" />,
-    },
-    {
-        id: "sub7",
         title: "Quote",
         icon: <Emoji symbol="😃" label="Quote" />,
     },

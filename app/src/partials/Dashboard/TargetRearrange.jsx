@@ -5,6 +5,7 @@ import CalendarWidget from './Widgets/CalendarWidget';
 import ToDoWidget from './Widgets/TodosWidget';
 import TimerWidget from './Widgets/TimerWidget';
 import WeatherWidget from './Widgets/WeatherWidget';
+import NewsWidget from '../Dashboard/Pages/NewsDashboard';
 
 function TargetRearrange({ board }) {
 
@@ -30,6 +31,8 @@ function TargetRearrange({ board }) {
                 return <TimerWidget />
             case "Weather":
                 return <WeatherWidget />
+            case "News":
+                return <NewsWidget />
         }
     }
 

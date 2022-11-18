@@ -6,7 +6,6 @@ import TargetRearrange from './TargetRearrange';
 const style = {
   height: '90vh',
   width: '90vw',
-  textAlign: 'center',
 }
 
 const TargetBox = memo(function TargetBox({ onDrop, board }) {
