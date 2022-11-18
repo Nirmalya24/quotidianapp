@@ -12,10 +12,18 @@ function WeatherDashboard() {
       axios.get(url).then((response) => {
         setData(response.data);
         // console.log(response.data);
+        localStorage.setItem("weather", JSON.stringify(response.data));
       });
       setLocation("");
     }
   };
+
+  // Get the weather data from LocalStorage if it exists
+  React.useEffect(() => {
+    if (localStorage.getItem("weather")) {
+      setData(JSON.parse(localStorage.getItem("weather")));
+    }
+  }, []);
 
   return (
     <div className="weather">
