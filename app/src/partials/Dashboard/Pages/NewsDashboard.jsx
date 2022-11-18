@@ -5,17 +5,32 @@ import axios from "axios";
 function NewsDashboard() {
   const [items, setItems] = useState([]);
   const [active, setActive] = useState(1);
-  const [category, setCategory] = useState("general");
-  const NEWS_API_KEY = "342e5a3a832e49e681b0a6c6f2665800";
+  const [category, setCategory] = useState("news");
+
+  var options = {
+    method: "GET",
+    url: "https://api.newscatcherapi.com/v2/latest_headlines",
+    params: {
+      lang: "en",
+      // sort_by: "relevancy",
+      page: "1",
+      page_size: "24",
+      countries: "US",
+      topic: category,
+      when: "24h",
+    },
+    headers: {
+      "x-api-key": "HmT_bPs53pwTD5N_1oMLLL77etqO9tHoD0RDCbyZsd0",
+    },
+  };
 
   const links = [
-    { id: 1, name: "General", value: "general" },
+    { id: 1, name: "General", value: "news" },
     { id: 2, name: "Business", value: "business" },
     { id: 3, name: "Entertainment", value: "entertainment" },
-    { id: 4, name: "Health", value: "health" },
-    { id: 5, name: "Science", value: "science" },
-    { id: 6, name: "Sports", value: "sports" },
-    { id: 7, name: "Technology", value: "technology" },
+    { id: 4, name: "Travel", value: "travel" },
+    { id: 5, name: "Sports", value: "sport" },
+    { id: 6, name: "Technology", value: "tech" },
   ];
 
   function onClick(id, value) {
@@ -26,15 +41,13 @@ function NewsDashboard() {
 
   useEffect(() => {
     axios
-      .get(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${NEWS_API_KEY}`
-      )
-      .then((response) => {
-        // console.log(response.data.articles);
+      .request(options)
+      .then(function (response) {
+        console.log(response.data.articles);
         setItems(response.data.articles);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(function (error) {
+        console.error(error);
       });
   }, [category]);
 

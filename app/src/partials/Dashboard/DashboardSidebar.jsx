@@ -22,11 +22,11 @@ function DashboardSidebar() {
       src: <Emoji symbol="🌎" label="News" />,
       link: "/dashboard/news",
     },
-    {
-      title: "Productivity",
-      src: <Emoji symbol="📥" label="Productivity" />,
-      link: "/dashboard/productivity",
-    },
+    // {
+    //   title: "Productivity",
+    //   src: <Emoji symbol="📥" label="Productivity" />,
+    //   link: "/dashboard/productivity",
+    // },
     {
       title: "Weather",
       src: <Emoji symbol="🌤" label="Weather" />,
@@ -43,14 +43,14 @@ function DashboardSidebar() {
       src: <Emoji symbol="🎁" label="Drawer" />,
       link: "/dashboard/settings",
       submenu: true,
-      submenuItems: { subWidgets }
+      submenuItems: { subWidgets },
     },
-    {
-      title: "Settings",
-      src: <Emoji symbol="⚙️" label="Settings" />,
-      link: "/dashboard/settings",
-      gap: true,
-    },
+    // {
+    //   title: "Settings",
+    //   src: <Emoji symbol="⚙️" label="Settings" />,
+    //   link: "/dashboard/settings",
+    //   gap: true,
+    // },
   ];
 
   const openMenuCloseDrawer = () => {
