@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import googleOneTap from "google-one-tap";
 import jwt_decode from "jwt-decode";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 const options = {
@@ -15,11 +13,14 @@ const options = {
 const URL = import.meta.env.VITE_API_URL;
 
 function GoogleButton() {
+  console.log(window.google);
   const [loginData, setLoginData] = useState(
     localStorage.getItem("loginData")
       ? JSON.parse(localStorage.getItem("loginData"))
       : null
   );
+
+  const [google, setGoogle] = useState(window.google);
 
   console.log("Login data:", loginData);
 
@@ -43,6 +44,9 @@ function GoogleButton() {
   // Global google
   useEffect(() => {
     if (!loginData) {
+      // let google = window.google;
+      console.log("Google:", google);
+      console.log(google);
       google.accounts.id.initialize({
         client_id:
           "321432838940-6b0v4vec649gq9iflbl0cfupn7vp47ql.apps.googleusercontent.com",
