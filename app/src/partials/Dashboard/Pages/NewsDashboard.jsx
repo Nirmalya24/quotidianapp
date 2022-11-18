@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import NewsItems from "./NewsItem.jsx";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function NewsDashboard() {
   const [items, setItems] = useState([]);
   const [active, setActive] = useState(1);
@@ -25,9 +27,7 @@ function NewsDashboard() {
 
   useEffect(() => {
     axios
-      .get(
-        `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=342e5a3a832e49e681b0a6c6f2665800`
-      )
+      .get(`${API_URL}/news/${category}`)
       .then((res) => {
         console.log(res.data.articles);
         setItems(res.data.articles);
