@@ -17,18 +17,13 @@ function DashboardSidebar() {
     },
     {
       title: "News",
-      src: <Emoji symbol="📰" label="News" />,
+      src: <Emoji symbol="🌎" label="News" />,
       link: "/dashboard/news",
     },
     {
       title: "Productivity",
       src: <Emoji symbol="📥" label="Productivity" />,
       link: "/dashboard/productivity",
-    },
-    {
-      title: "Schedule",
-      src: <Emoji symbol="🗓️" label="Schedule" />,
-      link: "/dashboard/schedule",
     },
     {
       title: "Weather",
@@ -48,16 +43,32 @@ function DashboardSidebar() {
       submenu: true,
       submenuItems: [
         {
+          title: "Mindmap",
+          icon: <Emoji symbol="🧠" label="Mindmap" />,
+        },
+        {
           title: "To Do List",
           icon: <Emoji symbol="📝" label="ToDo" />,
         },
         {
-          title: "Mind Map",
-          icon: <Emoji symbol="🧠" label="MindMap" />,
+          title: "Calendar",
+          icon: <Emoji symbol="🗓" label="Calendar" />,
         },
         {
           title: "Timer",
           icon: <Emoji symbol="⏰" label="Timer" />,
+        },
+        {
+          title: "News",
+          icon: <Emoji symbol="🌎" label="News" />,
+        },
+        {
+          title: "Weather",
+          icon: <Emoji symbol="🌤" label="Weather" />,
+        },
+        {
+          title: "Quote",
+          icon: <Emoji symbol="😃" label="Quote" />,
         },
       ],
     },
