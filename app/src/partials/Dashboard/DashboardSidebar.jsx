@@ -45,12 +45,12 @@ function DashboardSidebar() {
       submenu: true,
       submenuItems: { subWidgets },
     },
-    {
-      title: "Settings",
-      src: <Emoji symbol="⚙️" label="Settings" />,
-      link: "/dashboard/settings",
-      gap: true,
-    },
+    // {
+    //   title: "Settings",
+    //   src: <Emoji symbol="⚙️" label="Settings" />,
+    //   link: "/dashboard/settings",
+    //   gap: true,
+    // },
   ];
 
   const openMenuCloseDrawer = () => {

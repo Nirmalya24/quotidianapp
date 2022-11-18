@@ -54,7 +54,7 @@ function App() {
             {/* <Route path="productivity" element={<ProductivityDashboard />} /> */}
             <Route path="weather" element={<WeatherDashboard />} />
             <Route path="mindmap" element={<MindmapDashboard />} />
-            <Route path="settings" element={<Settings />} />
+            {/* <Route path="settings" element={<Settings />} /> */}
           </Route>
         </Routes>
       </DndProvider>
