@@ -1,34 +1,37 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Transition from '../utils/Transition';
+import Transition from "../utils/Transition";
+import QuoteSample from "../images/Widget-Samples/quote-sample.png";
+import TimerSample from "../images/Widget-Samples/timer-sample.png";
+import TodoSample from "../images/Widget-Samples/todo-sample.png";
+import WeatherSample from "../images/Widget-Samples/weather-sample.png";
 
-import FeaturesBg from '../images/features-bg.png';
-import FeaturesElement from '../images/features-element.png';
+import Emoji from "../utils/Emoji";
 
 function Features() {
-
   const [tab, setTab] = useState(1);
 
   const tabs = useRef(null);
 
   const heightFix = () => {
     if (tabs.current.children[tab]) {
-      tabs.current.style.height = tabs.current.children[tab - 1].offsetHeight + 'px'
+      tabs.current.style.height =
+        tabs.current.children[tab - 1].offsetHeight + "px";
     }
-  }
+  };
 
   useEffect(() => {
-    heightFix()
+    // heightFix();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab])
+  }, [tab]);
 
   return (
     <section className="relative">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
       <div
-        className="absolute inset-0 bg-gray-100 pointer-events-none mb-16"
+        className="absolute inset-0 bg-gray-200 pointer-events-none mb-auto"
         aria-hidden="true"
       ></div>
-      <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
+      <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-400 transform -translate-y-1/2"></div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-12 md:pt-20">
@@ -36,7 +39,7 @@ function Features() {
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h1 className="h2 mb-4">Explore our solution</h1>
             <p className="text-xl text-gray-600">
-              Use various widgets to create a unique homepage to conquer your
+              Use various widgets to create an unique dashboard to conquer your
               day.
             </p>
           </div>
@@ -50,12 +53,12 @@ function Features() {
             >
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
                 <h3 className="h3 mb-3">Powerful suite of widgets</h3>
-                <p className="text-xl text-gray-600">
+                {/* <p className="text-xl text-gray-600">
                   There are several widgets to choose from. You can use them to
                   add a calendar, a to-do list, a weather forecast, and more.
                   Adding a touch of personality to your homepage has never been
                   easier!
-                </p>
+                </p> */}
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
@@ -78,17 +81,12 @@ function Features() {
                       Stay up to date with weather!
                     </div>
                     <div className="text-gray-600">
-                      Get the latest weather forecast for your city. You never have to worry about the weather again.
+                      Get the latest weather forecast for your city. You never
+                      have to worry about the weather again.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg
-                      className="w-3 h-3 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
-                    </svg>
+                    <Emoji symbol="🌤" label="Weather" />
                   </div>
                 </a>
                 <a
@@ -108,24 +106,14 @@ function Features() {
                       Add a quick to-do list in a snap!
                     </div>
                     <div className="text-gray-600">
-                      Got a lot on your plate? Add a to-do list to your homepage and never forget anything again.
-                      
+                      Got a lot on your plate? Add a to-do list to your homepage
+                      and never forget anything again.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg
-                      className="w-3 h-3 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <Emoji symbol="📝" label="ToDo" />
                   </div>
                 </a>
-                
 
                 <a
                   className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${
@@ -141,24 +129,14 @@ function Features() {
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">
-                      Feeling social? Add a social feed!
+                      Need a quick motivation? We got you!
                     </div>
                     <div className="text-gray-600">
-                      Stay up to date with your friends and family. Add a social feed to your homepage and never miss a beat.
+                      We are here for you with a daily quote to keep you going.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg
-                      className="w-3 h-3 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.334 8.06a.5.5 0 00-.421-.237 6.023 6.023 0 01-5.905-6c0-.41.042-.82.125-1.221a.5.5 0 00-.614-.586 6 6 0 106.832 8.529.5.5 0 00-.017-.485z"
-                        fill="#191919"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <Emoji symbol="😃" label="Quote" />
                   </div>
                 </a>
 
@@ -176,23 +154,16 @@ function Features() {
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">
-                      And much more!
+                      It always helps to get work done when the clock is
+                      ticking...
                     </div>
                     <div className="text-gray-600">
-                      There are many more widgets to choose from. You can add a clock, motivational quotes, and more.
+                      Keep track of how much time you have spent on a task with
+                      a timer.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg
-                      className="w-3 h-3 fill-current"
-                      viewBox="0 0 12 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z"
-                        fillRule="nonzero"
-                      />
-                    </svg>
+                    <Emoji symbol="⏰" label="Timer" />,
                   </div>
                 </a>
               </div>
@@ -220,18 +191,10 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="md:max-w-none mx-auto rounded"
-                      src={FeaturesBg}
+                      src={WeatherSample}
                       width="500"
                       height="462"
                       alt="Features bg"
-                    />
-                    <img
-                      className="md:max-w-none absolute w-full left-0 transform animate-float"
-                      src={FeaturesElement}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: "30%" }}
                     />
                   </div>
                 </Transition>
@@ -250,18 +213,10 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="md:max-w-none mx-auto rounded"
-                      src={FeaturesBg}
+                      src={TodoSample}
                       width="500"
                       height="462"
                       alt="Features bg"
-                    />
-                    <img
-                      className="md:max-w-none absolute w-full left-0 transform animate-float"
-                      src={FeaturesElement}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: "30%" }}
                     />
                   </div>
                 </Transition>
@@ -280,18 +235,10 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="md:max-w-none mx-auto rounded"
-                      src={FeaturesBg}
+                      src={QuoteSample}
                       width="500"
                       height="462"
                       alt="Features bg"
-                    />
-                    <img
-                      className="md:max-w-none absolute w-full left-0 transform animate-float"
-                      src={FeaturesElement}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: "30%" }}
                     />
                   </div>
                 </Transition>
@@ -310,18 +257,10 @@ function Features() {
                   <div className="relative inline-flex flex-col">
                     <img
                       className="md:max-w-none mx-auto rounded"
-                      src={FeaturesBg}
+                      src={TimerSample}
                       width="500"
                       height="462"
                       alt="Features bg"
-                    />
-                    <img
-                      className="md:max-w-none absolute w-full left-0 transform animate-float"
-                      src={FeaturesElement}
-                      width="500"
-                      height="44"
-                      alt="Element"
-                      style={{ top: "30%" }}
                     />
                   </div>
                 </Transition>

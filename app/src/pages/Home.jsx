@@ -1,12 +1,8 @@
-import React from 'react';
-
-import Header from '../partials/Header';
-import HeroHome from '../partials/HeroHome';
-import FeaturesHome from '../partials/Features';
-import FeaturesBlocks from '../partials/FeaturesBlocks';
-import Testimonials from '../partials/Testimonials';
-import Newsletter from '../partials/Newsletter';
-import Footer from '../partials/Footer';
+import React from "react";
+import Header from "../partials/Header";
+import HeroHome from "../partials/HeroHome";
+import FeaturesHome from "../partials/Features";
+import Footer from "../partials/Footer";
 
 function Home() {
   return (
@@ -19,9 +15,6 @@ function Home() {
         {/*  Page sections */}
         <HeroHome />
         <FeaturesHome />
-        {/* <FeaturesBlocks /> */}
-        {/* <Testimonials /> */}
-        {/* <Newsletter /> */}
       </main>
 
       {/*  Site footer */}
