@@ -4,6 +4,8 @@ import Control from "../../images/control.png";
 import Logo from "../../images/Q..png";
 import { Link } from "react-router-dom";
 import { BsChevronDown } from "react-icons/bs";
+import { subWidgets } from "./SubWidgets"
+import { StatefulSourceBox as SourceBox } from "./SourceBox";
 
 function DashboardSidebar() {
   const [open, setOpen] = useState(true);
@@ -41,36 +43,7 @@ function DashboardSidebar() {
       src: <Emoji symbol="🎁" label="Drawer" />,
       link: "/dashboard/settings",
       submenu: true,
-      submenuItems: [
-        {
-          title: "Mindmap",
-          icon: <Emoji symbol="🧠" label="Mindmap" />,
-        },
-        {
-          title: "To Do List",
-          icon: <Emoji symbol="📝" label="ToDo" />,
-        },
-        {
-          title: "Calendar",
-          icon: <Emoji symbol="🗓" label="Calendar" />,
-        },
-        {
-          title: "Timer",
-          icon: <Emoji symbol="⏰" label="Timer" />,
-        },
-        {
-          title: "News",
-          icon: <Emoji symbol="🌎" label="News" />,
-        },
-        {
-          title: "Weather",
-          icon: <Emoji symbol="🌤" label="Weather" />,
-        },
-        {
-          title: "Quote",
-          icon: <Emoji symbol="😃" label="Quote" />,
-        },
-      ],
+      submenuItems: { subWidgets }
     },
     {
       title: "Settings",
@@ -102,9 +75,8 @@ function DashboardSidebar() {
   return (
     <div className="flex">
       <div
-        className={` ${
-          open ? "w-72" : "w-20 "
-        } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
+        className={` ${open ? "w-72" : "w-20 "
+          } bg-[#0E3506] h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src={Control}
@@ -116,15 +88,13 @@ function DashboardSidebar() {
         <div className="flex gap-x-4 items-center">
           <img
             src={Logo}
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
+            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"
+              }`}
             alt={"Menubar cursor"}
           />
           <h1
-            className={`text-white origin-left font-medium text-xl duration-200 ${
-              !open && "scale-0"
-            }`}
+            className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
+              }`}
           >
             Quotidian.app
           </h1>
@@ -139,9 +109,8 @@ function DashboardSidebar() {
               >
                 <li
                   className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 text-md items-center gap-x-4
-              ${Menu.gap ? "mt-20" : "mt-2"} ${
-                    index === 0 && "bg-light-white"
-                  } `}
+              ${Menu.gap ? "mt-20" : "mt-2"} ${index === 0 && "bg-light-white"
+                    } `}
                 >
                   {Menu.src}
                   <span
@@ -156,22 +125,7 @@ function DashboardSidebar() {
                   )}
                 </li>
               </Link>
-              {Menu.submenu && submenuOpen && open && (
-                <div className="grid grid-cols-2 pl-2">
-                  {Menu.submenuItems.map((submenuItem, index) => (
-                    <div
-                      key={index}
-                      className={`rounded-md cursor-pointer hover:bg-[#FEA303] hover:text-white hover:font-bold font-semibold text-slate-300 items-center`}
-                      onClick={() => widgetClick(submenuItem.title)}
-                    >
-                      <div className="card items-center text-center width-auto card-compact py-3">
-                        <h2 className="text-xs">{submenuItem.title}</h2>
-                        <div className="text-3xl">{submenuItem.icon}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+              {Menu.submenu && submenuOpen && open && (<SourceBox />)}
             </div>
           ))}
         </ul>

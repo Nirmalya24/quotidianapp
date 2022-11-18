@@ -99,12 +99,8 @@
 
 
 /************ Widget Target Rearrange **************/
-.widgets {
-    align-items: center;
-    border: solid 2px #a31919;
-    border-radius: .2em;
+.widgetID {
     padding: .5em .5em .5em .5em;
-    margin-bottom: 1em;
 }
 
 /************ Widget Timer **************/
