@@ -3,8 +3,8 @@ import { v4 as uuid } from "uuid";
 import axios from "axios";
 
 function TodosWidget() {
-  //   const URL = "https://quotidianapp-dev.up.railway.app/api";
-  const URL = "http://localhost:5001/api";
+  const URL = import.meta.env.VITE_API_URL;
+  // const URL = "http://localhost:5001/api";
   const [email, setEmail] = useState(
     localStorage.getItem("loginData")
       ? JSON.parse(localStorage.getItem("loginData")).email

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Google from "../utils/GoogleButton";
+import GoogleButton from "../utils/GoogleButton";
 import Logo from "../utils/Logo";
 
 function Header() {
@@ -31,7 +31,7 @@ function Header() {
           {/* Site navigation */}
           <nav className="flex flex-grow">
             <div className="flex flex-grow justify-end flex-wrap items-center">
-              <Google />
+              <GoogleButton />
             </div>
 
             {/* <ul className="flex flex-grow justify-end flex-wrap items-center">
