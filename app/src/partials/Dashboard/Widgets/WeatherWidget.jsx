@@ -6,17 +6,24 @@ function WeatherWidget() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=895284fb2d2c50a520ea537456963d9c`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=895284fb2d2c50a520ea537456963d9c`;
 
   const searchLocation = (event) => {
     if (event.key === "Enter") {
       axios.get(url).then((response) => {
         setData(response.data);
-        // console.log(response.data);
+        localStorage.setItem("weather", JSON.stringify(response.data));
       });
       setLocation("");
     }
   };
+
+  // Get the weather data from LocalStorage if it exists
+  React.useEffect(() => {
+    if (localStorage.getItem("weather")) {
+      setData(JSON.parse(localStorage.getItem("weather")));
+    }
+  }, []);
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl image-full ml-0 m-6 before:opacity-90">

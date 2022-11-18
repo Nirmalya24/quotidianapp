@@ -11,11 +11,42 @@ datasource db {
 }
 
 model User {
-    id              String   @id @default(auto()) @map("_id") @db.ObjectId
-    email           String   @unique
-    given_name      String
-    family_name     String
-    google_id       String   @unique
-    token           String    @unique
-    createdAt       DateTime @default(now())
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  email       String   @unique
+  given_name  String
+  family_name String
+  google_id   String   @unique
+  token       String   @unique
+  createdAt   DateTime @default(now())
+  todos       Todos[]
+  Nodes       Nodes[]
+  Edges       Edges[]
+}
+
+model Todos {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  todoId      String  @unique
+  description String
+  completed   Boolean
+  email       String
+  emailId     User    @relation(fields: [email], references: [email])
+}
+
+model Nodes {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  nodeId   String @unique
+  type     String
+  data     Json
+  position Json
+  email    String
+  emailId  User   @relation(fields: [email], references: [email])
+}
+
+model Edges {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  edgeId  String @unique
+  source  String
+  target  String
+  email   String
+  emailId User   @relation(fields: [email], references: [email])
 }
