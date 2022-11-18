@@ -141,7 +141,7 @@ function TodosWidget() {
             </div>
           </div>
         ))}
-      {todos.length > 0 && `${todos.length} items`}
+      {todos && todos.length > 0 && `${todos.length} items`}
       {email === null && (
         <div className="alert alert-error shadow-lg bg-red-700">
           <div>

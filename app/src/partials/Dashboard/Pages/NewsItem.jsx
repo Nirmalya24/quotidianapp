@@ -13,9 +13,9 @@ function NewsItem({ item }) {
             <div className="card max-w-lg bg-base-100 shadow-lg rounded-lg hover:shadow-2xl transition duration-300">
                 <figure><img src={item.urlToImage} alt={item.title} /></figure>
                 <div className="card-body">
-                    <h2 className="card-title">
-                        <h2>{item.title}</h2>
-                    </h2>
+                    <div className="card-title">
+                        <h1>{item.title}</h1>
+                    </div>
                     <div className="article-source">
                         <img src={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE, SIZE,
                     URL&url=http://${website}&size=16`} alt={item.source.id} />
