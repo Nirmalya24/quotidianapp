@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../utils/Modal';
-import CalendarSample from '../images/Widget-Samples/calendar-sample.png'
-import DashboardSample from '../images/Widget-Samples/dashboard-sample.png'
-import QuoteSample from '../images/Widget-Samples/quote-sample.png'
-import TimerSample from '../images/Widget-Samples/timer-sample.png'
-import TodoSample from '../images/Widget-Samples/todo-sample.png'
-import WeatherSample from '../images/Widget-Samples/weather-sample.png'
+import Modal from "../utils/Modal";
 
 function HeroHome() {
 
@@ -53,10 +47,11 @@ function HeroHome() {
               className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
               data-aos="zoom-y-out"
             >
-              Take control of your{" "}
+              A personalized{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-                homepage
-              </span>
+                Dashboard
+              </span>{" "}
+              for you{""}
             </h1>
             <div className="max-w-3xl mx-auto">
               <p
@@ -64,41 +59,11 @@ function HeroHome() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                You use a browser everyday and yet don't have many options to
-                customize it to your liking. We're here to change that.
+                Organize your digital life with a dashboard that's tailored to
+                you.
               </p>
             </div>
           </div>
-
-          {/* Show Widget Samples */}
-          <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-            <div className="carousel-item">
-              <figure>
-                <img src={CalendarSample} className="CalendarSample" />
-              </figure>
-            </div>
-            <div className="carousel-item">
-              <figure>
-                <img src={QuoteSample} className="QuoteSample" />
-              </figure>
-            </div>
-            <div className="carousel-item">
-              <figure>
-                <img src={TimerSample} className="TimerSample" />
-              </figure>
-            </div>
-            <div className="carousel-item">
-              <figure>
-                <img src={TodoSample} className="TodoSample" />
-              </figure>
-            </div>
-            <div className="carousel-item">
-              <figure>
-                <img src={WeatherSample} className="WeatherSample" />
-              </figure>
-            </div>
-          </div>
-
 
           {/* Modal */}
           <Modal
