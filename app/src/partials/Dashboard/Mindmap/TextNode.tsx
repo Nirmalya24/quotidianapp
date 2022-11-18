@@ -10,6 +10,7 @@ function TextNode({ id, data }: NodeProps<NodeData>) {
   }, []);
 
   const updateNodeText = useStore((state) => state.updateNodeText);
+  const getNodeText = useStore((state) => state.getNodeText);
   const deleteNode = useStore((state) => state.deleteNode);
 
   return (
@@ -24,6 +25,7 @@ function TextNode({ id, data }: NodeProps<NodeData>) {
           id="text"
           name="text"
           placeholder="Add text"
+          value={getNodeText(id)}
           onChange={(evt) => updateNodeText(id, evt.target.value)}
         />
       </div>
