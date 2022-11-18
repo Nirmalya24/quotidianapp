@@ -6,7 +6,7 @@ import { FaQuoteRight } from "react-icons/fa";
 
 function QuoteWidget() {
 
-    const quoteAPI = "http://api.quotable.io/random";
+    const quoteAPI = "https://api.quotable.io/random";
     const [quote, setQuote] = useState(
         localStorage.getItem("quote")
             ? JSON.parse(localStorage.getItem("quote"))
