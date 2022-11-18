@@ -31,7 +31,7 @@ function Creators() {
 
 function Footer() {
   return (
-    <footer className="footer items-center p-4 bg-neutral text-neutral-content mt-10">
+    <footer className="footer items-center p-4 bg-neutral text-neutral-content">
       <div className="items-center grid-flow-col">
         <Logo fontSize={"text-4xl"} />
       </div>
