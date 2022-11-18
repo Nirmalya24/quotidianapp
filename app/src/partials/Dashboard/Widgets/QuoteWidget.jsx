@@ -3,6 +3,7 @@ import axios from "axios";
 import { IoMdRefreshCircle } from "react-icons/io";
 import { FaQuoteLeft } from "react-icons/fa";
 import { FaQuoteRight } from "react-icons/fa";
+import QuoteBackground from "../../../images/quote_background.jpeg";
 
 function QuoteWidget() {
 
@@ -49,7 +50,10 @@ function QuoteWidget() {
             {
                 quote ?
                     (
-                        <div className="card w-96 bg-primary text-primary-content ml-0 m-6">
+                        <div className="card w-96 bg-base-100 shadow-xl image-full text-primary-content ml-0 m-6">
+                            <figure>
+                                <img src={QuoteBackground} alt="QuoteImg" />
+                            </figure>
                             <div className="card-body">
                                 <div className="flex flex-row relative">
                                     <div><FaQuoteLeft /></div>
