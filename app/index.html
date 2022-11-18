@@ -20,9 +20,15 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="module" src="./src/main.jsx"></script>
     <script>
-      const google = window.google;
-      console.log("Google loaded", google)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+        const google = window.google;
+        // console.log(google);
     </script>
+      
     
   </body>
 </html>

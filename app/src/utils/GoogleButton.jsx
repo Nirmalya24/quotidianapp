@@ -52,7 +52,12 @@ function GoogleButton() {
           "321432838940-6b0v4vec649gq9iflbl0cfupn7vp47ql.apps.googleusercontent.com",
         callback: handleCallbackResponse,
         ux_mode: "popup",
-        allowed_parent_origins: ["http://localhost:5173", "http://localhost"],
+        allowed_parent_origins: [
+          "http://localhost:5173",
+          "http://localhost",
+          "https://quotidian.app/",
+          "https://www.quotidian.app/",
+        ],
         context: "use",
       });
 
