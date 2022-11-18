@@ -163,7 +163,7 @@ function Features() {
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <Emoji symbol="⏰" label="Timer" />,
+                    <Emoji symbol="⏰" label="Timer" />
                   </div>
                 </a>
               </div>
